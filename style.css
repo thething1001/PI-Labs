@@ -29,10 +29,12 @@ nav {
     display: flex;
     align-items: center;
     font-size: 0.7rem;
+    margin-left: 30px;
 }
 
 .profile-container img {
     height: 100%;
+    margin-right: 10px;
 }
 
 .student-container{
@@ -51,6 +53,8 @@ nav {
     grid-template-columns: 1fr 10fr;
 }
 
+
+
 .table-container {
     width: 100%;
 }
@@ -62,10 +66,46 @@ nav {
 
 .table-container th, td {
     border: 1px solid black;
-    width: auto;
-    text-align: center;
+    text-align: center; 
+}
+
+.table-container tr :nth-child(1) {
+    width: 10%;
+}
+
+.table-container tr :nth-child(2) {
+    width: 10%;
+}
+
+.table-container tr :nth-child(3) {
+    width: 20%;
+}
+
+.table-container tr :nth-child(4) {
+    width: 10%;
+}
+
+.table-container tr :nth-child(5) {
+    width: 20%;
+}
+
+.table-container tr :nth-child(6) {
+    width: 10%;
+}
+
+.table-container tr :nth-child(7) {
+    width: 20%;
 }
 
 .table-container tr {
     height: 30px;
+}
+
+.account-container img {
+    width: 50px;
+    transition: width 2s ease;
+}
+
+.account-container img:hover {
+    width: 100px;
 }

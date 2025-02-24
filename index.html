@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <title>PI Project</title>
 </head>
 <body>
     <header>
-        
 
     </header>
 
@@ -35,35 +33,20 @@
     
         <section class="student-container">
             <h1>Students</h1>
-            <button class="add-student-btn">+</button>
+            <button class="add-student-btn" onClick="addNewStudent()">+</button>
             <div class="table-container">
-                <table>
+                <table id="my-table">
                     <tr>
-                        <th><input type="checkbox" name="select-all" value="Bike"></th>
+                        <th>
+                            <input type="checkbox" id="select-all" name="select-all" value="select-all" onchange="selectAllPressed()">
+                            <label for="select-all">Select all</label><br>
+                        </th>
                         <th>Group</th>
                         <th>Name</th>
                         <th>Gender</th>
                         <th>Birthday</th>
                         <th>Status</th>
                         <th>Options</th>
-                    </tr>
-                    <tr>
-                        <td>Alfreds Futterkiste</td>
-                        <td>Maria Anders</td>
-                        <td>Germany</td>
-                        <td>Alfreds Futterkiste</td>
-                        <td>Maria Anders</td>
-                        <td>Germany</td>
-                        <td>Germany</td>
-                    </tr>
-                    <tr>
-                        <td>Alfreds Futterkiste</td>
-                        <td>Maria Anders</td>
-                        <td>Germany</td>
-                        <td>Alfreds Futterkiste</td>
-                        <td>Maria Anders</td>
-                        <td>Germany</td>
-                        <td>Germany</td>
                     </tr>
                 </table>
             </div>

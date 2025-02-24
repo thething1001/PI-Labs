@@ -69,7 +69,7 @@ nav {
     text-align: center; 
 }
 
-.table-container tr :nth-child(1) {
+/* .table-container tr :nth-child(1) {
     width: 10%;
 }
 
@@ -95,10 +95,10 @@ nav {
 
 .table-container tr :nth-child(7) {
     width: 20%;
-}
+} */
 
 .table-container tr {
-    height: 30px;
+    height: 40px;
 }
 
 .account-container img {
@@ -108,4 +108,32 @@ nav {
 
 .account-container img:hover {
     width: 100px;
+}
+
+.controls-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.control-button {
+    border: none;
+    background: none;
+    padding: 0px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.control-button img {
+    width: 20px;
+    height: 20px;
+}
+
+.status-img {
+    width: 20px;
+    height: 20px;
 }

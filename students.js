@@ -1,6 +1,7 @@
 const table = document.getElementById("my-table");
 const select_all_checkbox = document.getElementById("select-all");
 let count = 0;
+let selectedRow;
 
 function addNewStudent() {
     count++;
@@ -14,29 +15,25 @@ function addNewStudent() {
     new_tr.appendChild(td_selector);
 
     const td_group = document.createElement("td");
-    const node2 = document.createTextNode("PZ-22");
-    td_group.appendChild(node2);
+    td_group.textContent = "PZ-22"
     new_tr.appendChild(td_group);
 
     const td_name = document.createElement("td");
-    const node3 = document.createTextNode("Bohdan Hamela " + count);
-    td_name.appendChild(node3);
+    td_name.textContent = "Bohdan Hamela " + count;
     new_tr.appendChild(td_name);
 
     const td_gender = document.createElement("td");
-    const node4 = document.createTextNode("Male");
-    td_gender.appendChild(node4);
+    td_gender.textContent = "Male";
     new_tr.appendChild(td_gender);
 
     const td_birthday = document.createElement("td");
-    const node5 = document.createTextNode(new Date().toISOString().split('T')[0]);
-    td_birthday.appendChild(node5);
+    td_birthday.textContent = new Date().toISOString().split('T')[0];
     new_tr.appendChild(td_birthday);
 
     const td_status = document.createElement("td");
     const status_img = document.createElement("img");
     status_img.classList.add("status-img");
-    status_img.src = "assets/bell.png";
+    status_img.src = "assets/online.png";
     td_status.appendChild(status_img);
     new_tr.appendChild(td_status);
 
@@ -55,14 +52,13 @@ function addNewStudent() {
     const delete_img = document.createElement("img");
     delete_img.src = "assets/close.png";
     delete_btn.appendChild(delete_img);
-    delete_btn.onclick =() => deleteStudent(delete_btn);;
+    delete_btn.onclick = () => deleteStudent(delete_btn);;
     
     tcontrols_div.appendChild(edit_btn);
     tcontrols_div.appendChild(delete_btn);
     td_controls.appendChild(tcontrols_div)
     new_tr.appendChild(td_controls);
 
-    
     table.appendChild(new_tr);
 }
 
@@ -75,5 +71,21 @@ function selectAllPressed(){
 
 function deleteStudent(button){
     const row = button.closest("tr");
-    table.removeChild(row);
+    const name = row.cells[2].innerText;
+    selectedRow = row;
+
+    document.getElementById("modalText").textContent = `Are you sure you want to delete user ${name}?`;
+    document.getElementById("modal").style.display = "block";
 }
+
+function onConfirmDelete(){
+    if (selectedRow) {
+        selectedRow.remove();
+    }
+    document.getElementById("modal").style.display = "none";
+}
+
+function onCancelDelete(){
+    document.getElementById("modal").style.display = "none";
+}
+

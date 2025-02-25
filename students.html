@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="students.css">
+    <title>PI Project</title>
+</head>
+<body>
+
+    <header>
+        <h2>CMS</h2>
+        <div class="account-container">
+            <img src="assets/bell.png" alt="Notifications" class="notifications-img">
+            <div class="profile-container">
+                <img src="assets/profile.png" alt="Profile Icon">
+                <h2>Bohdan Hamela</h2>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <aside>
+            <nav>   
+                <ul class="navigation-list">
+                    <li><a>Dashboard</a></li>
+                    <li><a><strong>Students</strong></a></li>
+                    <li><a>Tasks</a></li>
+                </ul>
+            </nav>
+        </aside>
+    
+        <section class="student-container">
+            <h1>Students</h1>
+            <button class="add-student-btn" onClick="addNewStudent()"><strong>+</strong></button>
+            <div class="table-container">
+                <table id="my-table">
+                    <tr class="table-header">
+                        <th>
+                            <input type="checkbox" id="select-all" name="select-all" value="select-all" onchange="selectAllPressed()">
+                        </th>
+                        <th>Group</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Birthday</th>
+                        <th>Status</th>
+                        <th>Options</th>
+                    </tr>
+                </table>
+            </div>
+            <div class="pagination">
+                <button>&lt;</button>
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>4</button>
+                <button>&gt;</button>
+            </div>
+
+            <div id="modal" class="modal">
+                <p id="modalText"></p>
+                <div class="modal-buttons">
+                    <button id="confirmDelete" onclick="onConfirmDelete()">Ok</button>
+                    <button id="cancelDelete" onclick="onCancelDelete()">Cancel</button>
+                </div>
+            </div>
+
+        </section>
+    </main>
+    
+
+    <footer>
+
+    </footer>
+
+    <script src="students.js"></script>
+</body>
+</html>

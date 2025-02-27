@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const td_status = document.createElement("td");
       const status_img = document.createElement("img");
       status_img.classList.add("status-img");
-      status_img.src = "../assets/online.png";
+      status_img.src = "../assets/online.svg";
       status_img.alt = "Status";
       td_status.appendChild(status_img);
       new_tr.appendChild(td_status);

@@ -1,48 +1,71 @@
-header {
-  width: 100%;
+.header {
+  width: 100vw;
   height: 50px;
-  padding: 10px;
+  padding: 10px 30px;
   background-color: rgb(81, 81, 81);
-  color: #f0f0f0;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-header h2,
-h1 {
+.header h1 {
   color: #f0f0f0;
+  font-size: x-large;
+  margin: 0;
 }
 
-header a {
+.header h2 {
+  color: #f0f0f0;
+  font-size: large;
+  margin: 0;
+}
+
+.header__link {
   text-decoration: none;
-}
-
-.account-container {
-  display: flex;
-  background-color: rgb(81, 81, 81);
-  height: 100%;
-}
-
-.profile-container {
   height: 100%;
   display: flex;
   align-items: center;
-  font-size: 0.7rem;
-  margin-left: 30px;
 }
 
-.profile-container img {
+.header__container {
+  display: flex;
+  align-items: center;
   height: 100%;
-  background-color: rgb(81, 81, 81);
-  margin-right: 10px;
+  gap: 5px;
 }
 
-.notifications-img {
+.header__container_profile {
+  gap: 20px;
+}
+
+.header__icon {
+  height: 100%;
+}
+
+.header__container_profile_notifications {
+  position: relative;
+}
+
+.header__notifications_signal {
+  position: absolute;
+  height: 30%;
+  width: 30%;
+  right: 15%;
+  top: 0;
+  /* display: none; */
+  opacity: 0%;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.header__notifications_signal:hover {
+  animation: fade-in-fade-out 1s infinite alternate;
+}
+
+.header__icon_notifications {
   transition: transform 0.1s ease-in-out;
 }
 
-.notifications-img:hover {
+.header__icon_notifications:hover {
   animation: jiggle 0.2s infinite alternate;
 }
 
@@ -52,5 +75,17 @@ header a {
   }
   100% {
     transform: rotate(5deg);
+  }
+}
+
+@keyframes fade-in-fade-out {
+  0% {
+    opacity: 0%;
+  }
+  50% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 0%;
   }
 }

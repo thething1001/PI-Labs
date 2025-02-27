@@ -10,16 +10,34 @@
     <title>PI Project: Students</title>
   </head>
   <body>
-    <header>
-      <a href="../students/students.html"><h1>CMS</h1></a>
-      <div class="account-container">
-        <img
-          src="../assets/bell.png"
-          alt="Notifications"
-          class="notifications-img"
-        />
-        <div class="profile-container">
-          <img src="../assets/profile.png" alt="Profile Icon" />
+    <header class="header">
+      <div class="header__container header__container_logo">
+        <a class="header__link" href="../students/students.html">
+          <img class="header__icon" src="../assets/logo.svg" alt="Logo" />
+        </a>
+        <a class="header__link" href="../students/students.html">
+          <h1>CMS</h1>
+        </a>
+      </div>
+      <div class="header__container header__container_profile">
+        <div class="header__container header__container_profile_notifications">
+          <img
+            src="../assets/bell.svg"
+            alt="Notifications"
+            class="header__icon header__icon_notifications"
+          />
+          <img
+            src="../assets/notification.svg"
+            alt="Notifications"
+            class="header__notifications_signal"
+          />
+        </div>
+        <div class="header__container header__container_account">
+          <img
+            class="header__icon"
+            src="../assets/profile.svg"
+            alt="Profile Icon"
+          />
           <h2>Bohdan Hamela</h2>
         </div>
       </div>

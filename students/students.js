@@ -4,6 +4,7 @@ const select_all_checkbox = document.getElementById("select-all");
 let count = 0;
 let selectedRows = [];
 let studentsList = [];
+let studentToEdit;
 
 document.addEventListener("DOMContentLoaded", (e) => {
   // Table Listeners
@@ -107,24 +108,35 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const edit_btn = document.createElement("button");
       edit_btn.classList.add("control-button");
       const edit_img = document.createElement("img");
-      edit_img.src = "assets/edit.png";
+      edit_img.src = "../assets/edit.png";
       edit_btn.appendChild(edit_img);
       edit_btn.addEventListener("click", (e) => {
         const row = e.target.closest("tr");
-        // if (row.firstChild.firstChild.checked == false) return;
+        if (row.firstChild.firstChild.checked == false) return;
         console.log("show modal edit");
         const id = Number(row.lastChild.textContent);
+        studentToEdit = studentsList.find((s) => s.id === id);
 
         document.getElementById("modalAddEditForm").reset();
         document.getElementById("modalAddEditHeading").textContent =
           "Edit student";
+        document.getElementById("AddEditGroupInput").value =
+          studentToEdit.group;
+        document.getElementById("AddEditFirstNameInput").value =
+          studentToEdit.firstName;
+        document.getElementById("AddEditLastNameInput").value =
+          studentToEdit.lastName;
+        document.getElementById("AddEditGenderInput").value =
+          studentToEdit.gender;
+        document.getElementById("AddEditBirthdayInput").value =
+          studentToEdit.birthday;
         document.getElementById("modalAddEditStudent").style.display = "block";
       });
 
       const delete_btn = document.createElement("button");
       delete_btn.classList.add("control-button");
       const delete_img = document.createElement("img");
-      delete_img.src = "assets/close.png";
+      delete_img.src = "../assets/close.png";
       delete_btn.appendChild(delete_img);
       delete_btn.addEventListener("click", (e) => {
         if (e.target.closest("tr").firstChild.firstChild.checked == false)
@@ -150,6 +162,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
       const id_label = document.createElement("label");
       id_label.textContent = count;
+      id_label.style.display = "none";
 
       controls_div.appendChild(edit_btn);
       controls_div.appendChild(delete_btn);

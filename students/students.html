@@ -3,14 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../global.css" />
     <link rel="stylesheet" href="../header.css" />
+    <link rel="stylesheet" href="../global.css" />
+    <link rel="stylesheet" href="../navbar.css" />
     <link rel="stylesheet" href="students.css" />
-    <title>PI Project</title>
+    <title>PI Project: Students</title>
   </head>
   <body>
     <header>
-      <h2>CMS</h2>
+      <a href="../students/students.html"><h1>CMS</h1></a>
       <div class="account-container">
         <img
           src="../assets/bell.png"
@@ -24,21 +25,21 @@
       </div>
     </header>
 
-    <main class="main-container">
+    <div class="main-container">
       <aside>
         <nav>
           <ul class="navigation-list">
-            <li><a>Dashboard</a></li>
+            <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
             <li>
-              <a><strong>Students</strong></a>
+              <a href="../students/students.html"><strong>Students</strong></a>
             </li>
-            <li><a>Tasks</a></li>
+            <li><a href="../tasks/tasks.html">Tasks</a></li>
           </ul>
         </nav>
       </aside>
 
-      <section class="student-container">
-        <h1>Students</h1>
+      <main class="student-container">
+        <h2>Students</h2>
         <button id="add-student-btn">
           <strong>+</strong>
         </button>
@@ -52,6 +53,7 @@
                   name="select-all"
                   value="select-all"
                 />
+                <label for="select-all">Select All</label>
               </th>
               <th>Group</th>
               <th>Name</th>
@@ -74,7 +76,7 @@
         <div id="modalAddEditStudent" class="modal">
           <form id="modalAddEditForm">
             <div class="modalHeader">
-              <h3 id="modalAddEditHeading"></h3>
+              <h3 id="modalAddEditHeading">Add/Edit</h3>
               <button id="closeAddEdit">x</button>
             </div>
             <hr />
@@ -134,8 +136,8 @@
             <button id="cancelDelete">Cancel</button>
           </div>
         </div>
-      </section>
-    </main>
+      </main>
+    </div>
 
     <footer></footer>
 

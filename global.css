@@ -1,8 +1,14 @@
 * {
   box-sizing: border-box;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #0f0f0f;
 }
 
 body {
   margin: 0;
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: 1fr 10fr;
 }

@@ -1,0 +1,8 @@
+.navigation-list {
+  list-style: none;
+  padding-right: 20px;
+}
+
+.navigation-list a {
+  text-decoration: none;
+}

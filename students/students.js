@@ -73,9 +73,17 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const td_selector = document.createElement("td");
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
+      checkbox.id = `select-student-${count}`;
       checkbox.value = count;
       checkbox.classList.add("select-student");
       td_selector.appendChild(checkbox);
+
+      const id_label = document.createElement("label");
+      id_label.textContent = count;
+      // id_label.style.display = "none";
+      id_label.setAttribute("for", `select-student-${count}`);
+      td_selector.appendChild(id_label);
+
       new_tr.appendChild(td_selector);
 
       const td_group = document.createElement("td");
@@ -97,7 +105,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const td_status = document.createElement("td");
       const status_img = document.createElement("img");
       status_img.classList.add("status-img");
-      status_img.src = "assets/online.png";
+      status_img.src = "../assets/online.png";
+      status_img.alt = "Status";
       td_status.appendChild(status_img);
       new_tr.appendChild(td_status);
 
@@ -109,6 +118,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
       edit_btn.classList.add("control-button");
       const edit_img = document.createElement("img");
       edit_img.src = "../assets/edit.png";
+      edit_img.alt = "Edit";
       edit_btn.appendChild(edit_img);
       edit_btn.addEventListener("click", (e) => {
         const row = e.target.closest("tr");
@@ -137,6 +147,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
       delete_btn.classList.add("control-button");
       const delete_img = document.createElement("img");
       delete_img.src = "../assets/close.png";
+      delete_img.alt = "Delete";
       delete_btn.appendChild(delete_img);
       delete_btn.addEventListener("click", (e) => {
         if (e.target.closest("tr").firstChild.firstChild.checked == false)
@@ -160,15 +171,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
         document.getElementById("modalDeleteStudent").style.display = "block";
       });
 
-      const id_label = document.createElement("label");
-      id_label.textContent = count;
-      id_label.style.display = "none";
-
       controls_div.appendChild(edit_btn);
       controls_div.appendChild(delete_btn);
       td_controls.appendChild(controls_div);
       new_tr.appendChild(td_controls);
-      new_tr.appendChild(id_label);
 
       table.appendChild(new_tr);
 

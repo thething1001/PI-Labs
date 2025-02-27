@@ -69,18 +69,64 @@
           <button>&gt;</button>
         </div>
 
-        <!-- <div id="modal-add-edit-student" class="modal">
-          <p id="modal-"></p>
-          <div class="modal-button1s">
-            <button id="confirmDelet1e">Ok</button>
-            <button id="cancelDele1te">
-              Cancel
-            </button>
-          </div>
-        </div> -->
+        <div id="modalAddEditStudent" class="modal">
+          <form id="modalAddEditForm">
+            <div class="modalHeader">
+              <h3 id="modalAddEditHeading"></h3>
+              <button id="closeAddEdit">x</button>
+            </div>
+            <hr />
+            <div>
+              <div>
+                <label for="AddEditGroupInput">Group</label>
+                <select name="groups" id="AddEditGroupInput">
+                  <option value="">--Please choose an option--</option>
+                  <option value="PZ-22">PZ-22</option>
+                  <option value="KI-34">KI-34</option>
+                  <option value="IR-12">IR-12</option>
+                  <option value="DP-32">DP-32</option>
+                  <option value="LK-45">LK-45</option>
+                  <option value="JH-14">JH-14</option>
+                </select>
+              </div>
+              <div>
+                <label for="AddEditFirstNameInput">First Name</label>
+                <input type="text" id="AddEditFirstNameInput" />
+              </div>
+              <div>
+                <label for="AddEditLastNameInput">Last Name</label>
+                <input type="text" id="AddEditLastNameInput" />
+              </div>
+              <div>
+                <label for="AddEditGenderInput">Gender</label>
+                <select name="genders" id="AddEditGenderInput">
+                  <option value="">--Please choose an option--</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div>
+                <label for="AddEditBirthdayInput">Birthday</label>
+                <input type="date" id="AddEditBirthdayInput" />
+              </div>
+            </div>
+            <hr />
+            <div class="modal-AddEdit-buttons">
+              <input type="submit" id="confirmAddEdit" value="Ok" />
+              <button id="cancelAddEdit">Cancel</button>
+            </div>
+          </form>
+        </div>
 
         <div id="modalDeleteStudent" class="modal">
+          <div class="modalHeader">
+            <h3>Warning</h3>
+            <button id="closeDelete">x</button>
+          </div>
+          <hr />
           <p id="modalDeleteText"></p>
+          <hr />
           <div class="modal-delete-buttons">
             <button id="confirmDelete">Ok</button>
             <button id="cancelDelete">Cancel</button>

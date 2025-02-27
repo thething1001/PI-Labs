@@ -40,7 +40,7 @@ header {
   display: flex;
   margin-left: 20px;
   width: 95%;
-  height: 100vh;
+  height: 100%;
   flex-direction: column;
   align-items: start;
 }
@@ -173,10 +173,24 @@ td {
   border: 1px solid black;
   box-shadow: 0px 0px 10px gray;
 }
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.modalHeader h3 {
+  padding: 0;
+  margin: 0;
+}
+
 .modal-delete-buttons {
-  margin-top: 10px;
+  margin-top: 20px;
   text-align: right;
 }
+
 .modal-delete-buttons button {
   margin-left: 10px;
 }

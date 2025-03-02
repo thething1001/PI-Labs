@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   document.getElementById("confirmDelete").addEventListener("click", (e) => {
     selectedRows.forEach((row) => {
       studentsList = studentsList.filter(
-        (s) => s.id !== Number(row.lastChild.textContent)
+        (s) => s.id !== Number(row.firstChild.lastChild.textContent)
       );
       row.remove();
       console.log(studentsList);
@@ -80,7 +80,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
       const id_label = document.createElement("label");
       id_label.textContent = count;
-      // id_label.style.display = "none";
+      // id_label.style.opacity = 0;
+      // id_label.style.position = "absolute";
       id_label.setAttribute("for", `select-student-${count}`);
       td_selector.appendChild(id_label);
 
@@ -122,10 +123,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
       edit_btn.appendChild(edit_img);
       edit_btn.addEventListener("click", (e) => {
         const row = e.target.closest("tr");
-        if (row.firstChild.firstChild.checked == false) return;
+        // if (row.firstChild.firstChild.checked == false) return;
         console.log("show modal edit");
-        const id = Number(row.lastChild.textContent);
-        studentToEdit = studentsList.find((s) => s.id === id);
+        const id = Number(row.firstChild.lastChild.textContent);
+        studentToEdit = studentsList.find((s) => Number(s.id) === id);
+        console.log(id);
 
         document.getElementById("modalAddEditForm").reset();
         document.getElementById("modalAddEditHeading").textContent =

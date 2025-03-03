@@ -1,34 +1,41 @@
+/* Mobile-first base styles */
 .main__container {
   display: flex;
-  margin-left: 20px;
-  width: 95%;
+  margin-left: 10px;
+  width: calc(100% - 20px);
   height: 100%;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
 }
 
 #main__addStudentBtn {
-  align-self: end;
+  align-self: flex-end;
+  padding: 5px 10px;
+  font-size: 16px;
 }
 
 .main__table_container {
   margin-top: 10px;
   width: 100%;
+  overflow-x: auto;
 }
 
 #main__table {
   border-collapse: collapse;
   width: 100%;
+  min-width: 300px;
 }
 
 #main__table th,
 td {
   border: 1px solid black;
   text-align: center;
+  padding: 5px;
+  min-width: 120px;
 }
 
 #main__table tr {
-  height: 40px;
+  height: 35px;
 }
 
 .main__table_controls_container {
@@ -40,36 +47,41 @@ td {
 .main__table_controls_button {
   border: none;
   background: none;
-  padding: 0px;
+  padding: 0;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
 }
 
 .main__table_controls_button img {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 .main__table_statusImg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
-.main__table_pagination{
+.main__table_pagination {
   align-self: center;
-  padding-top: 30px;
+  padding-top: 20px;
   padding-bottom: 20px;
+  display: flex;
+  gap: 5px;
 }
 
-
+.main__table_pagination button {
+  padding: 5px 10px;
+  font-size: 14px;
+}
 
 /* Modals */
 .modal-container {
-  display: none; 
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -84,10 +96,12 @@ td {
   top: 50%;
   transform: translate(-50%, -50%);
   background: white;
-  padding: 20px;
+  padding: 15px;
   border: 1px solid black;
   box-shadow: 0px 0px 10px gray;
   z-index: 1001;
+  width: 90%;
+  max-width: 400px;
 }
 
 .modal-backdrop {
@@ -97,14 +111,14 @@ td {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 999; 
+  z-index: 999;
 }
 
 .modal-container.active {
   display: block;
 }
 
-.modal__header  {
+.modal__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -114,10 +128,11 @@ td {
 .modal__header h3 {
   padding: 0;
   margin: 0;
+  font-size: 18px;
 }
 
 #modal__addEdit {
-  width: 30%;
+  width: 90%;
 }
 
 .modal__addEdit_inputs_container {
@@ -128,19 +143,124 @@ td {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px 0px 5px 10px;
+  margin: 8px 0;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.modal__addEdit_input_container input, select {
-  width: 70%;
+.modal__addEdit_input_container label {
+  width: 100%;
+  text-align: left;
+}
+
+.modal__addEdit_input_container input,
+.modal__addEdit_input_container select {
+  width: 100%;
 }
 
 .modal__buttons {
-  margin-top: 20px;
+  margin-top: 15px;
   text-align: right;
 }
 
 .modal__button {
-  margin-left: 10px;
+  margin-left: 8px;
   padding: 5px 10px;
+  font-size: 14px;
+}
+
+/* Small screens (576px and up) */
+@media (min-width: 576px) {
+  .main__container {
+    margin-left: 15px;
+    width: calc(100% - 30px);
+  }
+
+  #main__addStudentBtn {
+    padding: 6px 12px;
+  }
+
+  #main__table tr {
+    height: 40px;
+  }
+
+  .modal {
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+  }
+
+  #modal__addEdit {
+    width: 80%;
+  }
+}
+
+/* Medium screens (768px and up) */
+@media (min-width: 768px) {
+  .main__container {
+    margin-left: 20px;
+    width: calc(100% - 40px);
+  }
+
+  .modal {
+    width: 60%;
+    max-width: 600px;
+  }
+
+  #modal__addEdit {
+    width: 60%;
+  }
+
+  .modal__addEdit_input_container {
+    flex-direction: row;
+    margin: 10px 0 5px 10px;
+  }
+
+  .modal__addEdit_input_container input,
+  .modal__addEdit_input_container select {
+    width: 70%;
+  }
+
+  .modal__header h3 {
+    font-size: 20px;
+  }
+}
+
+/* Large screens (992px and up) */
+@media (min-width: 992px) {
+  .modal {
+    width: 40%;
+    max-width: 700px;
+  }
+
+  #modal__addEdit {
+    width: 40%;
+  }
+
+  .main__table_controls_button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .main__table_controls_button img,
+  .main__table_statusImg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Largest screens (1200px and up) */
+@media (min-width: 1200px) {
+  .modal {
+    width: 30%;
+    max-width: 800px;
+  }
+
+  #modal__addEdit {
+    width: 30%;
+  }
+
+  .main__container {
+    width: 95%;
+  }
 }

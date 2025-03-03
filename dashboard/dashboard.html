@@ -23,21 +23,50 @@
           <img
             src="../assets/bell.svg"
             alt="Notifications"
-            class="header__icon header__icon_notifications"
+            class="header__icon"
+            id="header__icon_notifications"
           />
           <img
             src="../assets/notification.svg"
             alt="Notifications Signal"
             class="header__notifications_signal"
+            id="header__notifications_signal"
           />
+          <div class="header__notifications_preview" id="header__notifications_preview">
+            <div class="notification_item">
+              <img src="../assets/avatar_placeholder.svg" alt="Avatar" class="notification_avatar" />
+              <div>
+                <p><strong>John Doe</strong></p>
+                <p>Submitted assignment</p>
+              </div>
+            </div>
+            <div class="notification_item">
+              <img src="../assets/avatar_placeholder.svg" alt="Avatar" class="notification_avatar" />
+              <div>
+                <p><strong>Jane Smith</strong></p>
+                <p>Requested feedback</p>
+              </div>
+            </div>
+            <div class="notification_item">
+              <img src="../assets/avatar_placeholder.svg" alt="Avatar" class="notification_avatar" />
+              <div>
+                <p><strong>Alice Johnson</strong></p>
+                <p>Missed deadline</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="header__container header__container_account">
+        <div class="header__container header__container_account" id="header__profile">
           <img
             class="header__icon"
             src="../assets/profile.svg"
             alt="Profile Icon"
           />
           <h2>Bohdan Hamela</h2>
+          <div class="header__profile_dropdown" id="header__profile_dropdown">
+            <a href="#" class="header__profile_link">Profile</a>
+            <button class="header__logout_btn">LogOut</button>
+          </div>
         </div>
       </div>
     </header>

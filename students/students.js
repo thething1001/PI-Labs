@@ -1,5 +1,5 @@
-const table = document.getElementById("my-table");
-const select_all_checkbox = document.getElementById("select-all");
+const table = document.getElementById("main__table");
+const select_all_checkbox = document.getElementById("main__table_selectAll");
 
 let count = 0;
 let selectedRows = [];
@@ -8,22 +8,15 @@ let studentToEdit;
 
 document.addEventListener("DOMContentLoaded", (e) => {
   // Table Listeners
-  document.getElementById("select-all").addEventListener("change", (e) => {
-    const checkboxes = document.querySelectorAll(".select-student");
+  document.getElementById("main__table_selectAll").addEventListener("change", (e) => {
+    const checkboxes = document.querySelectorAll(".main__table_selectStudent");
     checkboxes.forEach((checkbox) => {
       checkbox.checked = select_all_checkbox.checked;
     });
   });
 
-  document.getElementById("add-student-btn").addEventListener("click", (e) => {
-    document.getElementById("modalAddEditForm").reset();
-    document.getElementById("modalAddEditHeading").textContent =
-      "Add new student";
-    document.getElementById("modalAddEditStudent").style.display = "block";
-  });
-
   // Modal Delete Listeners
-  document.getElementById("confirmDelete").addEventListener("click", (e) => {
+  document.getElementById("modal__delete_confirmBtn").addEventListener("click", (e) => {
     selectedRows.forEach((row) => {
       studentsList = studentsList.filter(
         (s) => s.id !== Number(row.firstChild.lastChild.textContent)
@@ -33,29 +26,36 @@ document.addEventListener("DOMContentLoaded", (e) => {
     });
     selectedRows = [];
 
-    document.getElementById("modalDeleteStudent").style.display = "none";
+    document.getElementById("modal__delete").style.display = "none";
   });
 
-  document.getElementById("cancelDelete").addEventListener("click", (e) => {
-    document.getElementById("modalDeleteStudent").style.display = "none";
+  document.getElementById("modal__delete_cancelBtn").addEventListener("click", (e) => {
+    document.getElementById("modal__delete").style.display = "none";
   });
 
-  document.getElementById("closeDelete").addEventListener("click", (e) => {
-    document.getElementById("modalDeleteStudent").style.display = "none";
+  document.getElementById("modal__delete_closeBtn").addEventListener("click", (e) => {
+    document.getElementById("modal__delete").style.display = "none";
   });
 
   // Modal AddEdit Listeners
+  document.getElementById("main__addStudentBtn").addEventListener("click", (e) => {
+    document.getElementById("modal__addEdit_form").reset();
+    document.getElementById("modal__addEdit_heading").textContent =
+      "Add new student";
+    document.getElementById("modal__addEdit").style.display = "block";
+  });
+
   document
-    .getElementById("modalAddEditForm")
+    .getElementById("modal__addEdit_form")
     .addEventListener("submit", (e) => {
       e.preventDefault();
-      if (e.submitter != document.getElementById("confirmAddEdit")) return;
+      if (e.submitter != document.getElementById("modal__addEdit_confirmBtn")) return;
       count++;
-      const group = document.getElementById("AddEditGroupInput").value;
-      const firstName = document.getElementById("AddEditFirstNameInput").value;
-      const lastName = document.getElementById("AddEditLastNameInput").value;
-      const gender = document.getElementById("AddEditGenderInput").value;
-      const birthday = document.getElementById("AddEditBirthdayInput").value;
+      const group = document.getElementById("modal__addEdit_GroupInput").value;
+      const firstName = document.getElementById("modal__addEdit_FirstNameInput").value;
+      const lastName = document.getElementById("modal__addEdit_LastNameInput").value;
+      const gender = document.getElementById("modal__addEdit_GenderInput").value;
+      const birthday = document.getElementById("modal__addEdit_BirthdayInput").value;
       studentsList = [
         ...studentsList,
         {
@@ -73,16 +73,16 @@ document.addEventListener("DOMContentLoaded", (e) => {
       const td_selector = document.createElement("td");
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
-      checkbox.id = `select-student-${count}`;
+      checkbox.id = `main__table_selectStudent-${count}`;
       checkbox.value = count;
-      checkbox.classList.add("select-student");
+      checkbox.classList.add("main__table_selectStudent");
       td_selector.appendChild(checkbox);
 
       const id_label = document.createElement("label");
       id_label.textContent = count;
       // id_label.style.opacity = 0;
       // id_label.style.position = "absolute";
-      id_label.setAttribute("for", `select-student-${count}`);
+      id_label.setAttribute("for", `main__table_selectStudent-${count}`);
       td_selector.appendChild(id_label);
 
       new_tr.appendChild(td_selector);
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
       const td_status = document.createElement("td");
       const status_img = document.createElement("img");
-      status_img.classList.add("status-img");
+      status_img.classList.add("main__table_statusImg");
       status_img.src = "../assets/online.svg";
       status_img.alt = "Status";
       td_status.appendChild(status_img);
@@ -113,40 +113,39 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
       const td_controls = document.createElement("td");
       const controls_div = document.createElement("div");
-      controls_div.classList.add("controls-container");
+      controls_div.classList.add("main__table_controls_container");
 
       const edit_btn = document.createElement("button");
-      edit_btn.classList.add("control-button");
+      edit_btn.classList.add("main__table_controls_button");
       const edit_img = document.createElement("img");
       edit_img.src = "../assets/edit.png";
       edit_img.alt = "Edit";
       edit_btn.appendChild(edit_img);
       edit_btn.addEventListener("click", (e) => {
         const row = e.target.closest("tr");
-        // if (row.firstChild.firstChild.checked == false) return;
-        console.log("show modal edit");
+        if (row.firstChild.firstChild.checked == false) return;
         const id = Number(row.firstChild.lastChild.textContent);
         studentToEdit = studentsList.find((s) => Number(s.id) === id);
         console.log(id);
 
-        document.getElementById("modalAddEditForm").reset();
-        document.getElementById("modalAddEditHeading").textContent =
+        document.getElementById("modal__addEdit_form").reset();
+        document.getElementById("modal__addEdit_heading").textContent =
           "Edit student";
-        document.getElementById("AddEditGroupInput").value =
+        document.getElementById("modal__addEdit_GroupInput").value =
           studentToEdit.group;
-        document.getElementById("AddEditFirstNameInput").value =
+        document.getElementById("modal__addEdit_FirstNameInput").value =
           studentToEdit.firstName;
-        document.getElementById("AddEditLastNameInput").value =
+        document.getElementById("modal__addEdit_LastNameInput").value =
           studentToEdit.lastName;
-        document.getElementById("AddEditGenderInput").value =
+        document.getElementById("modal__addEdit_GenderInput").value =
           studentToEdit.gender;
-        document.getElementById("AddEditBirthdayInput").value =
+        document.getElementById("modal__addEdit_BirthdayInput").value =
           studentToEdit.birthday;
-        document.getElementById("modalAddEditStudent").style.display = "block";
+        document.getElementById("modal__addEdit").style.display = "block";
       });
 
       const delete_btn = document.createElement("button");
-      delete_btn.classList.add("control-button");
+      delete_btn.classList.add("main__table_controls_button");
       const delete_img = document.createElement("img");
       delete_img.src = "../assets/close.png";
       delete_img.alt = "Delete";
@@ -156,7 +155,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
           return;
         console.log("show modal delete");
 
-        const checkboxes = document.querySelectorAll(".select-student");
+        const checkboxes = document.querySelectorAll(".main__table_selectStudent");
         checkboxes.forEach((checkbox) => {
           if (checkbox.checked)
             selectedRows = [...selectedRows, checkbox.closest("tr")];
@@ -169,8 +168,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
           message = `Are you sure you want to delete user ${selectedRows[0].cells[2].innerText}?`;
         }
 
-        document.getElementById("modalDeleteText").textContent = message;
-        document.getElementById("modalDeleteStudent").style.display = "block";
+        document.getElementById("modal__delete_text").textContent = message;
+        document.getElementById("modal__delete").style.display = "block";
       });
 
       controls_div.appendChild(edit_btn);
@@ -180,14 +179,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
       table.appendChild(new_tr);
 
-      document.getElementById("modalAddEditStudent").style.display = "none";
+      document.getElementById("modal__addEdit").style.display = "none";
     });
 
-  document.getElementById("cancelAddEdit").addEventListener("click", (e) => {
-    document.getElementById("modalAddEditStudent").style.display = "none";
+  document.getElementById("modal__addEdit_cancelBtn").addEventListener("click", (e) => {
+    document.getElementById("modal__addEdit").style.display = "none";
   });
 
-  document.getElementById("closeAddEdit").addEventListener("click", (e) => {
-    document.getElementById("modalAddEditStudent").style.display = "none";
+  document.getElementById("modal__addEdit_closeBtn").addEventListener("click", (e) => {
+    document.getElementById("modal__addEdit").style.display = "none";
   });
 });

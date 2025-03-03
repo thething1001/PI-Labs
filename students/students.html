@@ -43,10 +43,10 @@
       </div>
     </header>
 
-    <div class="main-container">
-      <aside>
-        <nav>
-          <ul class="navigation-list">
+    <div class="page__container">
+      <aside class="aside">
+        <nav class="aside__nav">
+          <ul class="aside__nav_list">
             <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
             <li>
               <a href="../students/students.html"><strong>Students</strong></a>
@@ -56,22 +56,22 @@
         </nav>
       </aside>
 
-      <main class="student-container">
+      <main class="main__container">
         <h2>Students</h2>
-        <button id="add-student-btn">
+        <button id="main__addStudentBtn">
           <strong>+</strong>
         </button>
-        <div class="table-container">
-          <table id="my-table">
-            <tr class="table-header">
+        <div class="main__table_container">
+          <table id="main__table">
+            <tr class="main__table_header">
               <th>
                 <input
                   type="checkbox"
-                  id="select-all"
-                  name="select-all"
-                  value="select-all"
+                  id="main__table_selectAll"
+                  name="main__table_selectAll"
+                  value="Select All"
                 />
-                <label for="select-all">Select All</label>
+                <label for="main__table_selectAll">Select All</label>
               </th>
               <th>Group</th>
               <th>Name</th>
@@ -82,7 +82,7 @@
             </tr>
           </table>
         </div>
-        <div class="pagination">
+        <div class="main__table_pagination">
           <button>&lt;</button>
           <button>1</button>
           <button>2</button>
@@ -91,17 +91,17 @@
           <button>&gt;</button>
         </div>
 
-        <div id="modalAddEditStudent" class="modal">
-          <form id="modalAddEditForm">
-            <div class="modalHeader">
-              <h3 id="modalAddEditHeading">Add/Edit</h3>
-              <button id="closeAddEdit">x</button>
+        <div id="modal__addEdit" class="modal">
+          <form id="modal__addEdit_form">
+            <div class="modal__header">
+              <h3 id="modal__addEdit_heading">Add/Edit</h3>
+              <button id="modal__addEdit_closeBtn">x</button>
             </div>
             <hr />
             <div>
               <div>
-                <label for="AddEditGroupInput">Group</label>
-                <select name="groups" id="AddEditGroupInput">
+                <label for="modal__addEdit_GroupInput">Group</label>
+                <select name="groups" id="modal__addEdit_GroupInput">
                   <option value="">--Please choose an option--</option>
                   <option value="PZ-22">PZ-22</option>
                   <option value="KI-34">KI-34</option>
@@ -112,16 +112,16 @@
                 </select>
               </div>
               <div>
-                <label for="AddEditFirstNameInput">First Name</label>
-                <input type="text" id="AddEditFirstNameInput" />
+                <label for="modal__addEdit_FirstNameInput">First Name</label>
+                <input type="text" id="modal__addEdit_FirstNameInput" />
               </div>
               <div>
-                <label for="AddEditLastNameInput">Last Name</label>
-                <input type="text" id="AddEditLastNameInput" />
+                <label for="modal__addEdit_LastNameInput">Last Name</label>
+                <input type="text" id="modal__addEdit_LastNameInput" />
               </div>
               <div>
-                <label for="AddEditGenderInput">Gender</label>
-                <select name="genders" id="AddEditGenderInput">
+                <label for="modal__addEdit_GenderInput">Gender</label>
+                <select name="genders" id="modal__addEdit_GenderInput">
                   <option value="">--Please choose an option--</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
@@ -129,29 +129,29 @@
                 </select>
               </div>
               <div>
-                <label for="AddEditBirthdayInput">Birthday</label>
-                <input type="date" id="AddEditBirthdayInput" />
+                <label for="modal__addEdit_BirthdayInput">Birthday</label>
+                <input type="date" id="modal__addEdit_BirthdayInput" />
               </div>
             </div>
             <hr />
-            <div class="modal-AddEdit-buttons">
-              <input type="submit" id="confirmAddEdit" value="Ok" />
-              <button id="cancelAddEdit">Cancel</button>
+            <div class="modal__buttons">
+              <input type="submit" id="modal__addEdit_confirmBtn" value="Ok" />
+              <button id="modal__addEdit_cancelBtn">Cancel</button>
             </div>
           </form>
         </div>
 
-        <div id="modalDeleteStudent" class="modal">
-          <div class="modalHeader">
+        <div id="modal__delete" class="modal">
+          <div class="modal__header">
             <h3>Warning</h3>
-            <button id="closeDelete">x</button>
+            <button id="modal__delete_closeBtn">x</button>
           </div>
           <hr />
-          <p id="modalDeleteText"></p>
+          <p id="modal__delete_text"></p>
           <hr />
-          <div class="modal-delete-buttons">
-            <button id="confirmDelete">Ok</button>
-            <button id="cancelDelete">Cancel</button>
+          <div class="modal__buttons">
+            <button id="modal__delete_confirmBtn">Ok</button>
+            <button id="modal__delete_cancelBtn">Cancel</button>
           </div>
         </div>
       </main>

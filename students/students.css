@@ -1,8 +1,4 @@
-#add-student-btn {
-  align-self: end;
-}
-
-.student-container {
+.main__container {
   display: flex;
   margin-left: 20px;
   width: 95%;
@@ -11,33 +7,37 @@
   align-items: start;
 }
 
-.table-container {
+#main__addStudentBtn {
+  align-self: end;
+}
+
+.main__table_container {
   margin-top: 10px;
   width: 100%;
 }
 
-.table-container table {
+#main__table {
   border-collapse: collapse;
   width: 100%;
 }
 
-.table-container th,
+#main__table th,
 td {
   border: 1px solid black;
   text-align: center;
 }
 
-.table-container tr {
+#main__table tr {
   height: 40px;
 }
 
-.controls-container {
+.main__table_controls_container {
   width: 100%;
   display: flex;
   justify-content: space-evenly;
 }
 
-.control-button {
+.main__table_controls_button {
   border: none;
   background: none;
   padding: 0px;
@@ -49,21 +49,23 @@ td {
   height: 40px;
 }
 
-.control-button img {
+.main__table_controls_button img {
   width: 20px;
   height: 20px;
 }
 
-.status-img {
+.main__table_statusImg {
   width: 20px;
   height: 20px;
 }
 
-.pagination {
+.main__table_pagination{
   align-self: center;
   padding-top: 30px;
   padding-bottom: 20px;
 }
+
+
 
 .modal {
   display: none;
@@ -77,23 +79,23 @@ td {
   box-shadow: 0px 0px 10px gray;
 }
 
-.modalHeader {
+.modal__header  {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
 }
 
-.modalHeader h3 {
+.modal__header h3 {
   padding: 0;
   margin: 0;
 }
 
-.modal-delete-buttons {
+.modal__buttons {
   margin-top: 20px;
   text-align: right;
 }
 
-.modal-delete-buttons button {
+.modal__buttons button {
   margin-left: 10px;
 }

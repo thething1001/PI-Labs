@@ -1,8 +1,19 @@
-.navigation-list {
+.aside__nav_list {
   list-style: none;
-  padding-right: 20px;
+  padding: 0;
+  margin: 0 0 0 20px;
 }
 
-.navigation-list a {
+.aside__nav_list li a {
+  font-size: large;
   text-decoration: none;
+}
+
+.aside__nav_list li {
+  margin-bottom: 5px;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.aside__nav_list li:hover {
+  opacity: 80%;
 }

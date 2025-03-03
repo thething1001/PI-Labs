@@ -8,7 +8,8 @@ body {
   margin: 0;
 }
 
-.main-container {
+.page__container {
   display: grid;
-  grid-template-columns: 1fr 10fr;
+  grid-template-columns: 1fr 8fr;
+  margin-top: 20px;
 }

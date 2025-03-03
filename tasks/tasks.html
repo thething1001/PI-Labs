@@ -7,14 +7,13 @@
     <link rel="stylesheet" href="../header.css" />
     <link rel="stylesheet" href="../navbar.css" />
     <link rel="stylesheet" href="tasks.css" />
+    <link rel="icon" href="../assets/logo.svg" />
     <title>PI Project: Tasks</title>
   </head>
   <body>
     <header class="header">
       <div class="header__container header__container_logo">
-        <a class="header__link" href="../students/students.html">
-          <img class="header__icon" src="../assets/logo.svg" alt="Logotype" />
-        </a>
+        <img class="header__icon" id="header__sideMenu" src="../assets/logo.svg" alt="Logotype" />
         <a class="header__link" href="../students/students.html">
           <h1>CMS</h1>
         </a>
@@ -43,26 +42,27 @@
       </div>
     </header>
 
-    <div class="main-container">
-      <aside>
-        <nav>
-          <ul class="navigation-list">
-            <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
-            <li><a href="../students/students.html">Students</a></li>
+    <div id="page__container">
+      <aside class="aside" id="navbar">
+        <nav class="aside__nav">
+          <ul class="aside__nav_list">
+            <li><a href="../dashboard/dashboard.html"><img src="../assets/dashboard.svg" alt="Dashboard">Dashboard</a></li>
             <li>
-              <a href="../tasks/tasks.html"><strong>Tasks</strong></a>
+              <a href="../students/students.html"><img src="../assets/students.svg" alt="Dashboard">Students</a>
             </li>
+            <li><a href="../tasks/tasks.html"><img src="../assets/tasks.svg" alt="Dashboard"><strong>Tasks</strong></a></li>
           </ul>
         </nav>
       </aside>
 
-      <main class="student-container">
-        <h2>Tasks</h2>
+      <main class="page__container">
+        <h2 class="page__main_heading">Tasks</h2>
       </main>
     </div>
 
     <footer></footer>
 
     <script src="tasks.js"></script>
+    <script src="../header.js"></script>
   </body>
 </html>

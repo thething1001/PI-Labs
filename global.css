@@ -8,8 +8,12 @@ body {
   margin: 0;
 }
 
-.page__container {
+#page__container {
   display: grid;
   grid-template-columns: 1fr 8fr;
   margin-top: 20px;
+}
+
+.page__main_heading {
+  margin: 0;
 }

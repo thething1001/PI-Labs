@@ -7,13 +7,16 @@
 .aside__nav_list li a {
   font-size: large;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px
 }
 
 .aside__nav_list li {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   transition: opacity 0.1s ease-in-out;
 }
 
 .aside__nav_list li:hover {
-  opacity: 80%;
+  opacity: 70%;
 }

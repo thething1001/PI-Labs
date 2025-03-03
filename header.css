@@ -117,28 +117,24 @@
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
   padding: 8px;
   z-index: 1000;
-  width: 120px;
+  width: 80px;
 }
 
 .header__container_account:hover .header__profile_dropdown {
   display: block;
 }
 
-.header__profile_link {
+.header__profile_dropdown a {
   display: block;
   text-decoration: none;
   color: #0f0f0f;
   padding: 5px 0;
   font-size: small;
+  transition: opacity 0.1s ease-in-out;
 }
 
-.header__logout_btn {
-  width: 100%;
-  padding: 5px;
-  background: #f0f0f0;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  font-size: small;
+.header__profile_dropdown a:hover {
+  opacity: 70%;
 }
 
 @keyframes jiggle {
@@ -188,7 +184,7 @@
   }
 
   .header__profile_dropdown {
-    width: 150px;
+    width: 100px;
   }
 }
 
@@ -214,7 +210,7 @@
   }
 
   .header__profile_dropdown {
-    width: 180px;
+    width: 110px;
   }
 }
 

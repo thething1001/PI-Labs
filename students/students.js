@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
         const td_status = document.createElement("td");
         const status_img = document.createElement("img");
         status_img.classList.add("main__table_statusImg");
-        status_img.src = "../assets/online.svg";
+        status_img.src = (count % 2 == 0) ? "../assets/online.svg" : "../assets/offline.svg"
         status_img.alt = "Status";
         td_status.appendChild(status_img);
         new_tr.appendChild(td_status);
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
         const edit_btn = document.createElement("button");
         edit_btn.classList.add("main__table_controls_button");
         const edit_img = document.createElement("img");
-        edit_img.src = "../assets/edit.png";
+        edit_img.src = "../assets/edit.svg";
         edit_img.alt = "Edit";
         edit_btn.appendChild(edit_img);
         edit_btn.addEventListener("click", (e) => {
@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
         const delete_btn = document.createElement("button");
         delete_btn.classList.add("main__table_controls_button");
         const delete_img = document.createElement("img");
-        delete_img.src = "../assets/close.png";
+        delete_img.src = "../assets/trash.svg";
         delete_img.alt = "Delete";
         delete_btn.appendChild(delete_img);
         delete_btn.addEventListener("click", (e) => {

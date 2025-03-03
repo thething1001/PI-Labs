@@ -9,10 +9,23 @@
   overflow: hidden;
 }
 
-#main__addStudentBtn {
+.button_img {
   align-self: flex-end;
-  padding: 5px 10px;
-  font-size: 16px;
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.button_img img {
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.button_img img:hover {
+  opacity: 70%;
 }
 
 .main__table_container {
@@ -61,14 +74,18 @@ td {
   height: 35px;
 }
 
-.main__table_controls_button img {
+.main__table_controls_button img,
+.main__table_statusImg {
   width: 18px;
   height: 18px;
 }
 
-.main__table_statusImg {
-  width: 18px;
-  height: 18px;
+.main__table_controls_button img {
+  transition: opacity 0.1s ease-in-out;
+}
+
+.main__table_controls_button img:hover {
+  opacity: 70%;
 }
 
 .main__table_pagination {
@@ -161,15 +178,20 @@ td {
 .modal__addEdit_input_container input,
 .modal__addEdit_input_container select {
   width: 100%;
+  height: 24px;
+  border: 1px solid #0f0f0f;
+  border-radius: 2px;
 }
 
 .modal__buttons {
   margin-top: 15px;
   text-align: right;
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
 }
 
-.modal__button {
-  margin-left: 8px;
+.button_text {
   padding: 5px 10px;
   font-size: 14px;
 }
@@ -181,8 +203,9 @@ td {
     width: calc(100% - 30px);
   }
 
-  #main__addStudentBtn {
-    padding: 6px 12px;
+  .button_img {
+    width: 30px;
+    height: 30px;
   }
 
   #main__table tr {
@@ -221,6 +244,10 @@ td {
     margin: 10px 0 5px 10px;
   }
 
+  .modal__addEdit_input_container label {
+    width: 30%;
+  }
+
   .modal__addEdit_input_container input,
   .modal__addEdit_input_container select {
     width: 70%;
@@ -249,8 +276,8 @@ td {
 
   .main__table_controls_button img,
   .main__table_statusImg {
-    width: 20px;
-    height: 20px;
+    width: 26px;
+    height: 26px;
   }
 }
 

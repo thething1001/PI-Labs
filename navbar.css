@@ -5,7 +5,7 @@
 }
 
 .aside__nav_list li a {
-  font-size: medium;
+  font-size: large;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -25,8 +25,8 @@
 .aside {
   position: fixed;
   top: 50px; /* Below header */
-  left: -250px; /* Off-screen by default */
-  width: 250px;
+  left: -200px; /* Off-screen by default */
+  width: 200px;
   height: calc(100% - 50px); /* Full height minus header */
   background: #f0f0f0;
   transition: left 0.3s ease-in-out;
@@ -58,5 +58,6 @@
     height: auto;
     background: none;
     transition: none;
+    padding-top: 0;
   }
 }

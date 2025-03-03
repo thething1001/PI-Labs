@@ -6,6 +6,7 @@
   height: 100%;
   flex-direction: column;
   align-items: flex-start;
+  overflow: hidden;
 }
 
 #main__addStudentBtn {
@@ -30,8 +31,12 @@
 td {
   border: 1px solid black;
   text-align: center;
-  padding: 5px;
+  padding: 10px;
   min-width: 120px;
+}
+
+.main__table_header:nth-child(1) {
+  text-wrap: nowrap;
 }
 
 #main__table tr {

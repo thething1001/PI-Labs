@@ -9,7 +9,6 @@ body {
 }
 
 #page__container {
-  display: block; /* Stack vertically below 768px */
   margin-top: 10px;
   padding-left: 0;
 }

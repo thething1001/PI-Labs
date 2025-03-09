@@ -98,20 +98,21 @@ document.addEventListener("DOMContentLoaded", (e) => {
   
         const new_tr = document.createElement("tr");
         const td_selector = document.createElement("td");
+        const checkbox_container = document.createElement("div");
+        checkbox_container.classList.add("main__table_selector_container");
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.id = `main__table_selectStudent-${count}`;
         checkbox.value = count;
         checkbox.classList.add("main__table_selectStudent");
-        td_selector.appendChild(checkbox);
-  
+        checkbox_container.appendChild(checkbox);
+        
         const id_label = document.createElement("label");
         id_label.textContent = count;
-        // id_label.style.opacity = 0;
-        // id_label.style.position = "absolute";
         id_label.setAttribute("for", `main__table_selectStudent-${count}`);
-        td_selector.appendChild(id_label);
+        checkbox_container.appendChild(id_label);
   
+        td_selector.appendChild(checkbox_container);
         new_tr.appendChild(td_selector);
   
         const td_group = document.createElement("td");
@@ -133,7 +134,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
         const td_status = document.createElement("td");
         const status_img = document.createElement("img");
         status_img.classList.add("main__table_statusImg");
-        status_img.src = (count % 2 == 0) ? "../assets/online.svg" : "../assets/offline.svg"
+        status_img.src = (count % 2 == 0) ? "../assets/online.svg" : "../assets/offline.svg";
         status_img.alt = "Status";
         td_status.appendChild(status_img);
         new_tr.appendChild(td_status);
@@ -150,8 +151,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
         edit_btn.appendChild(edit_img);
         edit_btn.addEventListener("click", (e) => {
           const row = e.target.closest("tr");
-          if (row.firstChild.firstChild.checked == false) return;
-          const id = Number(row.firstChild.lastChild.textContent);
+          if (row.firstChild.firstChild.firstChild.checked == false) return;
+          const id = Number(row.firstChild.firstChild.lastChild.textContent);
           studentToEdit = studentsList.find((s) => Number(s.id) === id);
           console.log(id);
   
@@ -178,10 +179,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
         delete_img.alt = "Delete";
         delete_btn.appendChild(delete_img);
         delete_btn.addEventListener("click", (e) => {
-          if (e.target.closest("tr").firstChild.firstChild.checked == false)
+          if (e.target.closest("tr").firstChild.firstChild.firstChild.checked == false)
             return;
           console.log("show modal delete");
   
+          selectedRows = [];
           const checkboxes = document.querySelectorAll(".main__table_selectStudent");
           checkboxes.forEach((checkbox) => {
             if (checkbox.checked)

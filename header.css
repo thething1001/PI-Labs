@@ -58,7 +58,7 @@
   width: 25%;
   right: 10%;
   top: 0;
-  opacity: 0%;
+  opacity: 0;
   transition: opacity 0.1s ease-in-out;
 }
 
@@ -135,7 +135,7 @@
 }
 
 .header__profile_dropdown a:hover {
-  opacity: 70%;
+  opacity: 0.7;
 }
 
 @keyframes jiggle {
@@ -144,9 +144,9 @@
 }
 
 @keyframes fade-in-fade-out {
-  0% { opacity: 0%; }
-  50% { opacity: 100%; }
-  100% { opacity: 0%; }
+  0% { opacity: 0; }
+  50% { opacity: 1%; }
+  100% { opacity: 0; }
 }
 
 /* Small screens (576px and up) - No changes here */

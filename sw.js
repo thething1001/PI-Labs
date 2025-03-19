@@ -1,0 +1,78 @@
+const CACHE_NAME = "pwa-cms-cache-v1";
+const ASSETS = [
+  "/",
+  "/students",
+  "/students/students.html",
+  "/students/students.css",
+  "/students/students.js",
+  "/dashboard",
+  "/dashboard/dashboard.html",
+  "/dashboard/dashboard.css",
+  "/dashboard/dashboard.js",
+  "/tasks",
+  "/tasks/tasks.html",
+  "/tasks/tasks.css",
+  "/tasks/tasks.js",
+  "/messages",
+  "/messages/messages.html",
+  "/messages/messages.css",
+  "/messages/messages.js",
+  "/global.css",
+  "/navbar.css",
+  "/header.css",
+  "/header.js",
+  "/assets",
+  "/assets/logo.svg",
+  "/assets/add.svg",
+  "/assets/avatar_placeholder.svg",
+  "/assets/bell.svg",
+  "/assets/close.svg",
+  "/assets/dashboard.svg",
+  "/assets/edit.svg",
+  "/assets/hamburger.svg",
+  "/assets/notification.svg",
+  "/assets/offline.svg",
+  "/assets/online.svg",
+  "/assets/profile.svg",
+  "/assets/students.svg",
+  "/assets/tasks.svg",
+  "/assets/trash.svg",
+  "/assets/icon-128.png",
+  "/assets/icon-512.png",
+];
+
+// Встановлення Service Worker та кешування файлів
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(ASSETS);
+    })
+  );
+});
+
+// Перехоплення запитів і завантаження з кешу
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
+  );
+});
+
+// Оновлення Service Worker і видалення старого кешу
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches
+      .keys()
+      .then((keys) => {
+        return Promise.all(
+          keys
+            .filter((key) => key !== CACHE_NAME)
+            .map((key) => caches.delete(key))
+        );
+      })
+      .then(() => {
+        return self.clients.claim(); // Підключаємо новий SW до всіх вкладок
+      })
+  );
+});

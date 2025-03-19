@@ -1,0 +1,224 @@
+.header {
+  width: 100vw;
+  height: 50px;
+  padding: 10px 15px;
+  background-color: rgb(81, 81, 81);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header h1 {
+  color: #f0f0f0;
+  font-size: large;
+  margin: 0;
+}
+
+.header h2 {
+  color: #f0f0f0;
+  font-size: medium;
+  margin: 0;
+  display: none;
+}
+
+.header__link {
+  text-decoration: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 5px;
+}
+
+.header__container_profile {
+  gap: 10px;
+}
+
+.header__icon {
+  height: 80%;
+  cursor: pointer;
+}
+
+.header__logo {
+  height: 100%;
+}
+
+.header__container_profile_notifications {
+  position: relative;
+}
+
+.header__notifications_signal {
+  position: absolute;
+  height: 25%;
+  width: 25%;
+  right: 10%;
+  top: 0;
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.header__notifications_preview {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  z-index: 1000;
+  width: 200px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.notification_item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.notification_item:last-child {
+  border-bottom: none;
+}
+
+.notification_avatar {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+.notification_item p {
+  margin: 0;
+  font-size: x-small;
+}
+
+.header__container_profile_notifications:hover .header__notifications_preview {
+  display: block;
+}
+
+.header__container_account {
+  position: relative;
+}
+
+.header__profile_dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  z-index: 1000;
+  width: 80px;
+}
+
+.header__container_account:hover .header__profile_dropdown {
+  display: block;
+}
+
+.header__profile_dropdown a {
+  display: block;
+  text-decoration: none;
+  color: #0f0f0f;
+  padding: 5px 0;
+  font-size: small;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.header__profile_dropdown a:hover {
+  opacity: 0.7;
+}
+
+@keyframes jiggle {
+  0% { transform: rotate(-5deg); }
+  100% { transform: rotate(5deg); }
+}
+
+@keyframes fade-in-fade-out {
+  0% { opacity: 0; }
+  50% { opacity: 1%; }
+  100% { opacity: 0; }
+}
+
+/* Small screens (576px and up) - No changes here */
+@media (min-width: 576px) {
+  .header {
+    padding: 10px 20px;
+  }
+
+  .header h1 {
+    font-size: x-large;
+  }
+
+  .header h2 {
+    font-size: large;
+    display: block;
+  }
+
+  .header__container_profile {
+    gap: 15px;
+  }
+
+  .header__icon {
+    height: 100%;
+  }
+
+  .header__notifications_preview {
+    width: 250px;
+  }
+
+  .notification_avatar {
+    width: 30px;
+    height: 30px;
+  }
+
+  .notification_item p {
+    font-size: small;
+  }
+
+  .header__profile_dropdown {
+    width: 100px;
+  }
+}
+
+/* Medium screens (768px and up) */
+@media (min-width: 768px) {
+  .header {
+    padding: 10px 30px;
+  }
+
+  .header__container_profile {
+    gap: 20px;
+  }
+
+  #header__sideMenu {
+    display: none; /* Hide hamburger at 768px */
+  }
+}
+
+/* Large screens (992px and up) */
+@media (min-width: 992px) {
+  .header__notifications_preview {
+    width: 300px;
+  }
+
+  .header__profile_dropdown {
+    width: 110px;
+  }
+}
+
+/* Largest screens (1200px and up) */
+@media (min-width: 1200px) {
+  .header__notifications_preview {
+    width: 350px;
+  }
+}

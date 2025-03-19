@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #0f0f0f;
+}
+
+body {
+  margin: 0;
+}
+
+#page__container {
+  margin-top: 10px;
+  padding-left: 0;
+}
+
+.page__main_heading {
+  margin: 0;
+  font-size: 20px;
+}
+
+/* Medium screens (768px and up) */
+@media (min-width: 768px) {
+  #page__container {
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+    margin-top: 20px;
+  }
+
+  .page__main_heading {
+    font-size: 24px;
+  }
+}
+
+/* Large screens (992px and up) */
+@media (min-width: 992px) {
+  #page__container {
+    grid-template-columns: 1fr 8fr;
+  }
+
+  .page__main_heading {
+    font-size: 28px;
+  }
+}

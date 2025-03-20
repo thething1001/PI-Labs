@@ -1,39 +1,26 @@
 const CACHE_NAME = "pwa-cms-cache";
 const ASSETS = [
-  "/",
-  "/PI-Labs",
   "/PI-Labs/students",
   "/PI-Labs/students/students.html",
   "/PI-Labs/students/students.css",
   "/PI-Labs/students/students.js",
-
-  "/PI-Labs/dashboard",
   "/PI-Labs/dashboard/dashboard.html",
   "/PI-Labs/dashboard/dashboard.css",
   "/PI-Labs/dashboard/dashboard.js",
-
-  "/PI-Labs/tasks",
   "/PI-Labs/tasks/tasks.html",
   "/PI-Labs/tasks/tasks.css",
   "/PI-Labs/tasks/tasks.js",
-
-  "/PI-Labs/messages",
   "/PI-Labs/messages/messages.html",
   "/PI-Labs/messages/messages.css",
   "/PI-Labs/messages/messages.js",
-
   "/PI-Labs/global.css",
   "/PI-Labs/navbar.css",
   "/PI-Labs/header.css",
   "/PI-Labs/header.js",
   "/PI-Labs/offline.html",
   "/PI-Labs/sw.js",
-
-  "/PI-Labs/pwa",
   "/PI-Labs/pwa/init_sw.js",
   "/PI-Labs/pwa/manifest.json",
-
-  "/PI-Labs/assets",
   "/PI-Labs/assets/logo.svg",
   "/PI-Labs/assets/add.svg",
   "/PI-Labs/assets/avatar_placeholder.svg",
@@ -62,7 +49,7 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('Caching files');
-      return cache.addAll(ASSETS);
+        return cache.addAll(ASSETS);
     })
   );
 });

@@ -6,6 +6,12 @@ let selectedRows = [];
 let studentsList = [];
 let studentToEdit;
 
+let isValid = [false, false, false, false, false];
+
+const validationPatterns = {
+  name: /^[A-Za-z]{2,50}$/,
+};
+
 document.addEventListener("DOMContentLoaded", (e) => {
 
   // Table Listeners
@@ -46,17 +52,95 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   // Modal AddEdit Listeners
   document.getElementById("main__addStudentBtn").addEventListener("click", (e) => {
+    document.querySelectorAll(".modal__addEdit_input_container").forEach((c) => {c.classList.remove("error");})
     document.getElementById("modal__addEdit_form").reset();
     document.getElementById("modal__addEdit_heading").textContent =
       "Add new student";
     document.getElementById("modal__addEdit_container").classList.add("active");
   });
 
+  // Modal AddEdit Validators
+  const groupInput = document.getElementById("modal__addEdit_GroupInput");
+  const firstNameInput = document.getElementById("modal__addEdit_FirstNameInput");
+  const lastNameInput = document.getElementById("modal__addEdit_LastNameInput");
+  const genderInput = document.getElementById("modal__addEdit_GenderInput");
+  const birthdayInput = document.getElementById("modal__addEdit_BirthdayInput");
+
+  groupInput.addEventListener("change", (e) => {
+    isValid[0] = true;
+    e.target.parentElement.parentElement.classList.remove("error");
+    if(e.target.value === "") {
+      isValid[0] = false;
+      e.target.parentElement.parentElement.classList.add("error");
+    }
+  })
+
+  firstNameInput.addEventListener("change", (e) => {
+    isValid[1] = true;
+    e.target.parentElement.parentElement.classList.remove("error");
+    if(!validationPatterns.name.test(e.target.value)) {
+      isValid[1] = false;
+      e.target.parentElement.parentElement.classList.add("error");
+    }
+  })
+
+  lastNameInput.addEventListener("change", (e) => {
+    isValid[2] = true;
+    e.target.parentElement.parentElement.classList.remove("error");
+    if(!validationPatterns.name.test(e.target.value)) {
+      isValid[2] = false;
+      e.target.parentElement.parentElement.classList.add("error");
+    }
+  })
+
+  genderInput.addEventListener("change", (e) => {
+    isValid[3] = true;
+    e.target.parentElement.parentElement.classList.remove("error");
+    if(e.target.value === "") {
+      isValid[3] = false;
+      e.target.parentElement.parentElement.classList.add("error");
+    }
+  })
+
+  birthdayInput.addEventListener("change", (e) => {
+    isValid[4] = true;
+    e.target.parentElement.parentElement.classList.remove("error");
+    if (e.target.value) {
+      const birthDate = new Date(e.target.value);
+      const today = new Date();
+      const age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+      
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+
+      if (age < 16 || age > 100) {
+        isValid[4] = false;
+        e.target.parentElement.parentElement.classList.add("error");
+        e.target.parentElement.querySelector(".error-message").textContent = "Age must be 16-100";
+      }
+    } else {
+      isValid[4] = false;
+      e.target.parentElement.parentElement.classList.add("error");
+      e.target.parentElement.querySelector(".error-message").textContent = "Required";
+    }
+  })
+
   document
     .getElementById("modal__addEdit_form")
     .addEventListener("submit", (e) => {
       e.preventDefault();
       if (e.submitter != document.getElementById("modal__addEdit_confirmBtn")) return;
+      const event = new Event("change")
+      groupInput.dispatchEvent(event);
+      firstNameInput.dispatchEvent(event);
+      lastNameInput.dispatchEvent(event);
+      genderInput.dispatchEvent(event);
+      birthdayInput.dispatchEvent(event);
+      if(!isValid.every(item => item === true)) return;
+      isValid = [false, false, false, false, false]
+
       count++;
       const group = document.getElementById("modal__addEdit_GroupInput").value;
       const firstName = document.getElementById("modal__addEdit_FirstNameInput").value;

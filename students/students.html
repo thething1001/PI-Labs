@@ -74,8 +74,6 @@
             alt="Profile Icon"
           />
           <h2>Bohdan Hamela</h2>
-          <h2>Bohdan Hamela</h2>
-          <h2>Bohdan Hamela</h2>
           <div class="header__profile_dropdown" id="header__profile_dropdown">
             <a href="#" id="header__profileLink">Profile</a>
             <a href="#" id="header__logoutBtn">Log Out</a>
@@ -144,36 +142,51 @@
               <div class="modal__addEdit_inputs_container">
                 <div class="modal__addEdit_input_container">
                   <label for="modal__addEdit_GroupInput">Group</label>
-                  <select name="groups" id="modal__addEdit_GroupInput">
-                    <option value="">----</option>
-                    <option value="PZ-22">PZ-22</option>
-                    <option value="KI-34">KI-34</option>
-                    <option value="IR-12">IR-12</option>
-                    <option value="DP-32">DP-32</option>
-                    <option value="LK-45">LK-45</option>
-                    <option value="JH-14">JH-14</option>
-                  </select>
+                  <div class="modal__addEdit_input_container_error">
+                    <select name="groups" id="modal__addEdit_GroupInput">
+                      <option value="">----</option>
+                      <option value="PZ-22">PZ-22</option>
+                      <option value="KI-34">KI-34</option>
+                      <option value="IR-12">IR-12</option>
+                      <option value="DP-32">DP-32</option>
+                      <option value="LK-45">LK-45</option>
+                      <option value="JH-14">JH-14</option>
+                    </select>
+                    <span class="error-message">Choose an option</span>
+                  </div>
                 </div>
                 <div class="modal__addEdit_input_container">
                   <label for="modal__addEdit_FirstNameInput">First Name</label>
-                  <input type="text" id="modal__addEdit_FirstNameInput" />
+                  <div class="modal__addEdit_input_container_error">
+                    <input type="text" id="modal__addEdit_FirstNameInput" />
+                    <span class="error-message">Enter a valid first name</span>
+                  </div>
                 </div>
                 <div class="modal__addEdit_input_container">
                   <label for="modal__addEdit_LastNameInput">Last Name</label>
-                  <input type="text" id="modal__addEdit_LastNameInput" />
+                  <div class="modal__addEdit_input_container_error">
+                    <input type="text" id="modal__addEdit_LastNameInput" />
+                    <span class="error-message">Enter a valid last name</span>
+                  </div>
                 </div>
                 <div class="modal__addEdit_input_container">
                   <label for="modal__addEdit_GenderInput">Gender</label>
-                  <select name="genders" id="modal__addEdit_GenderInput">
-                    <option value="">----</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                  </select>
+                  <div class="modal__addEdit_input_container_error">
+                    <select name="genders" id="modal__addEdit_GenderInput">
+                      <option value="">----</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </select>
+                    <span class="error-message">Choose an option</span>
+                  </div>
                 </div>
                 <div class="modal__addEdit_input_container">
                   <label for="modal__addEdit_BirthdayInput">Birthday</label>
-                  <input type="date" id="modal__addEdit_BirthdayInput" />
+                  <div class="modal__addEdit_input_container_error">
+                    <input type="date" id="modal__addEdit_BirthdayInput" />
+                    <span class="error-message">Student shoud be from 16 to 100 years old</span>
+                  </div>
                 </div>
               </div>
               <hr />

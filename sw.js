@@ -1,4 +1,4 @@
-const CACHE_NAME = "pwa-cms-cache";
+const CACHE_NAME = "pwa-cms-cache-v2";
 const ASSETS = [
   "/PI-Labs/students",
   "/PI-Labs/students/students.html",

@@ -9,8 +9,14 @@
   overflow: hidden;
 }
 
+.main_heading_container {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
 .button_img {
-  align-self: flex-end;
   width: 25px;
   height: 25px;
   background-color: transparent;
@@ -54,6 +60,17 @@ td {
 
 #main__table tr {
   height: 35px;
+}
+
+#main__table th,
+th label {
+  background-color: rgb(81, 81, 81);
+  color: #f0f0f0;
+}
+
+
+#main__table tr:nth-child(2n) td {
+  background-color: #efefef;
 }
 
 .main__table_controls_container {
@@ -248,8 +265,8 @@ td {
   }
 
   .button_img {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
   }
 
   #main__table tr {

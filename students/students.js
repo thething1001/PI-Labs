@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
     if (e.target.value) {
       const birthDate = new Date(e.target.value);
       const today = new Date();
-      const age = today.getFullYear() - birthDate.getFullYear();
+      let age = today.getFullYear() - birthDate.getFullYear();
       const monthDiff = today.getMonth() - birthDate.getMonth();
       
       if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
@@ -164,22 +164,30 @@ document.addEventListener("DOMContentLoaded", (e) => {
           row.cells[3].textContent = gender;
           row.cells[4].textContent = birthday;
         }
-        studentToEdit = null;
+        console.log(JSON.stringify(studentToEdit))
+        console.log(JSON.stringify(studentsList))
         console.log(studentsList);
+        studentToEdit = null;
       } else {
+        newStudent = {
+          id: count,
+          group: group,
+          firstName: firstName,
+          lastName: lastName,
+          gender: gender,
+          birthday: birthday,
+        };
+
         studentsList = [
           ...studentsList,
-          {
-            id: count,
-            group: group,
-            firstName: firstName,
-            lastName: lastName,
-            gender: gender,
-            birthday: birthday,
-          },
+          newStudent
         ];
+        console.log(JSON.stringify(newStudent))
+        console.log(JSON.stringify(studentsList))
         console.log(studentsList);
   
+        select_all_checkbox.checked = false;
+        
         const new_tr = document.createElement("tr");
         const td_selector = document.createElement("td");
         const checkbox_container = document.createElement("div");
@@ -189,9 +197,18 @@ document.addEventListener("DOMContentLoaded", (e) => {
         checkbox.id = `main__table_selectStudent-${count}`;
         checkbox.value = count;
         checkbox.classList.add("main__table_selectStudent");
+        checkbox.addEventListener("change", (e) => {
+          console.log(document.querySelectorAll(".main__table_selectStudent"))
+          if(!e.target.checked) select_all_checkbox.checked = false;
+          else {
+            if (Array.from(document.querySelectorAll(".main__table_selectStudent")).every(c => c.checked)) {
+              select_all_checkbox.checked = true;
+            }
+          }
+        })
         checkbox_container.appendChild(checkbox);
         
-        const id_label = document.createElement("label");
+        const id_label = document.createElement("label"); 
         id_label.textContent = count;
         id_label.setAttribute("for", `main__table_selectStudent-${count}`);
         checkbox_container.appendChild(id_label);

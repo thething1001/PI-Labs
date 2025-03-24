@@ -1,4 +1,4 @@
-const CACHE_NAME = "pwa-cms-cache-v2";
+const CACHE_NAME = "pwa-cms-cache-v3";
 const ASSETS = [
   "/PI-Labs/students/students.html",
   "/PI-Labs/students/students.css",
@@ -16,7 +16,8 @@ const ASSETS = [
   "/PI-Labs/navbar.css",
   "/PI-Labs/header.css",
   "/PI-Labs/header.js",
-  "/PI-Labs/offline.html",
+  "/PI-Labs/index.js",
+  "/PI-Labs/index.html",
   "/PI-Labs/sw.js",
   "/PI-Labs/pwa/init_sw.js",
   "/PI-Labs/pwa/manifest.json",
@@ -72,7 +73,6 @@ self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
       .then(response => response || fetch(event.request))
-      .catch(() => caches.match('/offline.html'))
   );
 });
 

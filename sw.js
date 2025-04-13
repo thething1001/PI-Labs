@@ -41,44 +41,48 @@ const ASSETS = [
   "/PI-Labs/assets/logo-256.png",
   "/PI-Labs/assets/logo-512.png",
   "/PI-Labs/assets/screenshot-wide.png",
-  "/PI-Labs/assets/screenshot-narrow.png"
+  "/PI-Labs/assets/screenshot-narrow.png",
 ];
 
 // Встановлення Service Worker та кешування файлів
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log('Caching files');
-      return Promise.all(
-        ASSETS.map((asset) => {
-          return fetch(asset)
-            .then((response) => {
-              if (!response.ok) {
-                console.warn(`Failed to fetch ${asset}: ${response.status}`);
-                return; // Skip caching this asset
-              }
-              return cache.put(asset, response);
-            })
-            .catch((err) => {
-              console.error(`Error caching ${asset}: ${err}`);
-            });
-        })
-      ).then(() => console.log('Caching complete'));
-    }).catch((err) => console.error('Install failed:', err))
+    caches
+      .open(CACHE_NAME)
+      .then((cache) => {
+        console.log("Caching files");
+        return Promise.all(
+          ASSETS.map((asset) => {
+            return fetch(asset)
+              .then((response) => {
+                if (!response.ok) {
+                  console.warn(`Failed to fetch ${asset}: ${response.status}`);
+                  return; // Skip caching this asset
+                }
+                return cache.put(asset, response);
+              })
+              .catch((err) => {
+                console.error(`Error caching ${asset}: ${err}`);
+              });
+          })
+        ).then(() => console.log("Caching complete"));
+      })
+      .catch((err) => console.error("Install failed:", err))
   );
 });
 
 // Перехоплення запитів і завантаження з кешу
-self.addEventListener('fetch', event => {
+self.addEventListener("fetch", (event) => {
   event.respondWith(
-    caches.match(event.request)
-      .then(response => response || fetch(event.request))
+    caches
+      .match(event.request)
+      .then((response) => response || fetch(event.request))
   );
 });
 
 // Оновлення Service Worker і видалення старого кешу
 self.addEventListener("activate", (event) => {
-  console.log('Updating cache');
+  console.log("Updating cache");
   event.waitUntil(
     caches
       .keys()

@@ -10,7 +10,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
   document.addEventListener("click", (e) => {
     const navbar = document.getElementById("navbar");
     const sideMenu = document.getElementById("header__sideMenu");
-    if (window.innerWidth < 768 && !navbar.contains(e.target) && !sideMenu.contains(e.target)) {
+    if (
+      window.innerWidth < 768 &&
+      !navbar.contains(e.target) &&
+      !sideMenu.contains(e.target)
+    ) {
       navbar.classList.remove("active");
     }
   });

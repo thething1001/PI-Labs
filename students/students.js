@@ -1,8 +1,8 @@
 const table = document.getElementById("main__table");
-const select_all_checkbox = document.getElementById("main__table_selectAll");
 
 let studentsList = [];
 let page = 1;
+const studentsPerPage = 7;
 
 let selectedRows = [];
 let studentToEdit;
@@ -13,20 +13,21 @@ const validationPatterns = {
   name: /^[A-Za-z]{2,50}$/,
 };
 
-const BASE_API_URL = "http://localhost";
+const BASE_API_URL = "http://cms.local";
 
 // Fetch and display students
 async function fetchStudents() {
   try {
     const response = await fetch(`${BASE_API_URL}/students`);
     studentsList = await response.json();
+    page = 1;
   } catch (error) {
     console.error("Error fetching students:", error);
   }
 }
 
 function displayStudents() {
-  console.log(studentsList);  
+  console.log(studentsList);
   table.innerHTML = `
     <tr class="main__table_header">
       <th>
@@ -41,13 +42,18 @@ function displayStudents() {
       <th>Options</th>
     </tr>
   `;
+
   studentsList.forEach((student, index) => {
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>
         <div class="main__table_selector_container">
-          <input type="checkbox" id="main__table_selectStudent-${student.id}" value="${student.id}" class="main__table_selectStudent"/>
-          <label for="main__table_selectStudent-${student.id}">${student.id}</label>
+          <input type="checkbox" id="main__table_selectStudent-${
+            student.id
+          }" value="${student.id}" class="main__table_selectStudent"/>
+          <label for="main__table_selectStudent-${student.id}">${
+      student.id
+    }</label>
         </div>
       </td>
       <td>${student.group_name}</td>
@@ -55,7 +61,7 @@ function displayStudents() {
       <td>${student.gender}</td>
       <td>${student.birthday}</td>
       <td><img class="main__table_statusImg" src="../assets/${
-        index % 2 === 0 ? "online.svg" : "offline.svg"
+        student.status ? "online.svg" : "offline.svg"
       }" alt="Status"/></td>
       <td>
         <div class="main__table_controls_container">
@@ -69,25 +75,38 @@ function displayStudents() {
   attachRowListeners();
 }
 
-async function updateTable(){
+async function updateTable() {
   await fetchStudents();
   displayStudents();
 }
 
 // Attach event listeners to checkboxes, edit, and delete buttons
 function attachRowListeners() {
-  document.querySelectorAll(".main__table_selectStudent").forEach((checkbox) => {
-    checkbox.addEventListener("change", (e) => {
-      if (!e.target.checked) select_all_checkbox.checked = false;
-      else if (
-        Array.from(document.querySelectorAll(".main__table_selectStudent")).every(
-          (c) => c.checked
-        )
-      ) {
-        select_all_checkbox.checked = true;
-      }
+  document
+    .getElementById("main__table_selectAll")
+    .addEventListener("change", (e) => {
+      document
+        .querySelectorAll(".main__table_selectStudent")
+        .forEach((checkbox) => {
+          checkbox.checked = e.target.checked;
+        });
     });
-  });
+
+  document
+    .querySelectorAll(".main__table_selectStudent")
+    .forEach((checkbox) => {
+      checkbox.addEventListener("change", (e) => {
+        if (!e.target.checked)
+          document.getElementById("main__table_selectAll").checked = false;
+        else if (
+          Array.from(
+            document.querySelectorAll(".main__table_selectStudent")
+          ).every((c) => c.checked)
+        ) {
+          document.getElementById("main__table_selectAll").checked = true;
+        }
+      });
+    });
 
   document.querySelectorAll(".edit-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
@@ -100,13 +119,16 @@ function attachRowListeners() {
       document.getElementById("modal__addEdit_GroupInput").value =
         row.cells[1].textContent;
       const [firstName, lastName] = row.cells[2].textContent.split(" ");
-      document.getElementById("modal__addEdit_FirstNameInput").value = firstName;
+      document.getElementById("modal__addEdit_FirstNameInput").value =
+        firstName;
       document.getElementById("modal__addEdit_LastNameInput").value = lastName;
       document.getElementById("modal__addEdit_GenderInput").value =
         row.cells[3].textContent;
       document.getElementById("modal__addEdit_BirthdayInput").value =
         row.cells[4].textContent;
-      document.getElementById("modal__addEdit_container").classList.add("active");
+      document
+        .getElementById("modal__addEdit_container")
+        .classList.add("active");
     });
   });
 
@@ -122,22 +144,15 @@ function attachRowListeners() {
           ? "Are you sure you want to delete multiple users?"
           : `Are you sure you want to delete user ${selectedRows[0].cells[2].textContent}?`;
       document.getElementById("modal__delete_text").textContent = message;
-      document.getElementById("modal__delete_container").classList.add("active");
+      document
+        .getElementById("modal__delete_container")
+        .classList.add("active");
     });
   });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   updateTable();
-
-  // Select All Checkbox
-  select_all_checkbox.addEventListener("change", (e) => {
-    document
-      .querySelectorAll(".main__table_selectStudent")
-      .forEach((checkbox) => {
-        checkbox.checked = e.target.checked;
-      });
-  });
 
   // Modal Backdrop
   document.querySelectorAll(".modal-backdrop").forEach((backdrop) => {
@@ -157,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const response = await fetch(`${BASE_API_URL}/students`, {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ids }),
+          body: JSON.stringify({ ids: ids }),
         });
         if (response.ok) {
           updateTable();
@@ -176,9 +191,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("modal__delete_cancelBtn")
     .addEventListener("click", () => {
-      document
-a
-      .getElementById("modal__delete_container").classList.remove("active");
+      document;
+      a.getElementById("modal__delete_container").classList.remove("active");
     });
 
   document
@@ -200,12 +214,16 @@ a
       document.getElementById("modal__addEdit_heading").textContent =
         "Add new student";
       studentToEdit = null;
-      document.getElementById("modal__addEdit_container").classList.add("active");
+      document
+        .getElementById("modal__addEdit_container")
+        .classList.add("active");
     });
 
   // Modal Add/Edit Validators
   const groupInput = document.getElementById("modal__addEdit_GroupInput");
-  const firstNameInput = document.getElementById("modal__addEdit_FirstNameInput");
+  const firstNameInput = document.getElementById(
+    "modal__addEdit_FirstNameInput"
+  );
   const lastNameInput = document.getElementById("modal__addEdit_LastNameInput");
   const genderInput = document.getElementById("modal__addEdit_GenderInput");
   const birthdayInput = document.getElementById("modal__addEdit_BirthdayInput");
@@ -285,11 +303,16 @@ a
 
       try {
         const method = studentToEdit ? "PUT" : "POST";
-        const response = await fetch(`${BASE_API_URL}/students${studentToEdit ? `/${studentToEdit.id}` : ""}`, {
-          method,
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(studentData),
-        });
+        const response = await fetch(
+          `${BASE_API_URL}/students${
+            studentToEdit ? `/${studentToEdit.id}` : ""
+          }`,
+          {
+            method,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(studentData),
+          }
+        );
         if (response.ok) {
           updateTable();
           document

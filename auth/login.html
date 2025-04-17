@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="stylesheet" href="../global.css" />
+
+    <link rel="stylesheet" href="login.css" />
+    <link rel="icon" href="../assets/logo.svg" />
+    <link rel="manifest" href="../pwa/manifest.json" />
+    <title>PI Project: Login</title>
+  </head>
+  <body>
+    <div class="login__page">
+      <header class="header">
+        <img
+          class="header__icon header__logo"
+          src="../assets/logo.svg"
+          alt="Logotype"
+        />
+        <h1>CMS</h1>
+      </header>
+      <div class="login__form_container">
+        <form id="login__form">
+          <div class="login__form_header">
+            <h3>Log in</h3>
+          </div>
+          <hr />
+          <div class="login__form_inputs_container">
+            <div class="login__form_input_container">
+              <label for="login__form_emailInput">Email</label>
+              <input
+                type="email"
+                id="login__form_emailInput"
+                placeholder="John.Doe.PZ-22@cms.com"
+              />
+            </div>
+            <div class="login__form_input_container">
+              <label for="login__form_passwordInput">Password</label>
+              <input
+                type="password"
+                id="login__form_passwordInput"
+                placeholder="Password"
+              />
+            </div>
+          </div>
+          <hr />
+          <div class="login__form_buttons">
+            <input
+              type="submit"
+              id="login__form_confirmBtn"
+              value="Log in"
+              class="button_text"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script src="../env.js"></script>
+  <script src="login.js"></script>
+</html>

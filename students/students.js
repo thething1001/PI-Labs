@@ -389,10 +389,14 @@ document.addEventListener("DOMContentLoaded", () => {
             .classList.remove("active");
           studentToEdit = null;
         } else {
-          console.error(`Failed to save student: ${response.status}`);
+          const data = await response.json();
+          const errorMessage = data.errors.join("; ");
+          document.getElementById("modal__error_text").textContent = errorMessage;
+          document.getElementById("modal__error_container").classList.add("active");
         }
       } catch (error) {
-        console.error("Error saving student:", error);
+        document.getElementById("modal__error_text").textContent = "An unexpected error occurred while saving the student.";
+        document.getElementById("modal__error_container").classList.add("active");
       }
     });
 
@@ -412,5 +416,22 @@ document.addEventListener("DOMContentLoaded", () => {
         .getElementById("modal__addEdit_container")
         .classList.remove("active");
       studentToEdit = null;
+    });
+
+  // Modal Error Listeners
+  document
+    .getElementById("modal__error_closeBtn")
+    .addEventListener("click", () => {
+      document
+        .getElementById("modal__error_container")
+        .classList.remove("active");
+    });
+
+  document
+    .getElementById("modal__error_okBtn")
+    .addEventListener("click", () => {
+      document
+        .getElementById("modal__error_container")
+        .classList.remove("active");
     });
 });

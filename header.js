@@ -1,6 +1,7 @@
 async function logoutUser() {
   const token = sessionStorage.getItem("auth_token");
   if (!token) window.location.href = "/PI-Labs/auth/login.html";
+  console.log("wfwqfqw");
 
   try {
     await fetch(`${BASE_API_URL}/auth/logout`, {

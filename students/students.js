@@ -37,7 +37,6 @@ async function fetchStudents() {
 
 // Display students for the current page
 function displayStudents() {
-  // Clear table
   table.innerHTML = `
     <tr class="main__table_header">
       <th>
@@ -96,35 +95,67 @@ function displayStudents() {
 }
 
 function updatePagination(totalPages) {
-  paginationContainer.innerHTML = `
-    <button class="pagination-btn" ${page === 1 ? "disabled" : ""} data-page="${
-    page - 1
-  }">&lt;</button>
-  `;
+  paginationContainer.innerHTML = '';
 
-  for (let i = 1; i <= totalPages; i++) {
-    paginationContainer.innerHTML += `
-      <button class="pagination-btn" ${
-        i === page ? "disabled" : ""
-      } data-page="${i}">${i}</button>
+  if (totalPages > 1) {
+    paginationContainer.innerHTML = `
+      <button class="pagination-btn" ${page === 1 ? "disabled" : ""} data-page="${page - 1}"><</button>
     `;
-  }
 
-  paginationContainer.innerHTML += `
-    <button class="pagination-btn" ${
-      page === totalPages ? "disabled" : ""
-    } data-page="${page + 1}">&gt;</button>
-  `;
-
-  document.querySelectorAll(".pagination-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const newPage = parseInt(btn.getAttribute("data-page"));
-      if (!isNaN(newPage)) {
-        page = newPage;
-        displayStudents();
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) {
+        paginationContainer.innerHTML += `
+          <button class="pagination-btn" ${i === page ? "disabled" : ""} data-page="${i}">${i}</button>
+        `;
       }
+    } else {
+      paginationContainer.innerHTML += `
+        <button class="pagination-btn" ${1 === page ? "disabled" : ""} data-page="1">1</button>
+      `;
+
+      if (page <= 4) {
+        for (let i = 2; i <= 5; i++) {
+          paginationContainer.innerHTML += `
+            <button class="pagination-btn" ${i === page ? "disabled" : ""} data-page="${i}">${i}</button>
+          `;
+        }
+        paginationContainer.innerHTML += `<span>...</span>`;
+      } else if (page >= totalPages - 3) {
+        paginationContainer.innerHTML += `<span>...</span>`;
+        for (let i = totalPages - 4; i < totalPages; i++) {
+          paginationContainer.innerHTML += `
+            <button class="pagination-btn" ${i === page ? "disabled" : ""} data-page="${i}">${i}</button>
+          `;
+        }
+      } else {
+        paginationContainer.innerHTML += `<span>...</span>`;
+        for (let i = page - 1; i <= page + 1; i++) {
+          paginationContainer.innerHTML += `
+            <button class="pagination-btn" ${i === page ? "disabled" : ""} data-page="${i}">${i}</button>
+          `;
+        }
+        paginationContainer.innerHTML += `<span>...</span>`;
+      }
+
+      paginationContainer.innerHTML += `
+        <button class="pagination-btn" ${totalPages === page ? "disabled" : ""} data-page="${totalPages}">${totalPages}</button>
+      `;
+    }
+
+    paginationContainer.innerHTML += `
+      <button class="pagination-btn" ${page === totalPages ? "disabled" : ""} data-page="${page + 1}">></button>
+    `;
+
+    document.querySelectorAll(".pagination-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const newPage = parseInt(btn.getAttribute("data-page"));
+        if (!isNaN(newPage)) {
+          page = newPage;
+          displayStudents();
+        }
+      });
     });
-  });
+  }
 }
 
 async function updateTable() {
@@ -391,12 +422,18 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
           const data = await response.json();
           const errorMessage = data.errors.join("; ");
-          document.getElementById("modal__error_text").textContent = errorMessage;
-          document.getElementById("modal__error_container").classList.add("active");
+          document.getElementById("modal__error_text").textContent =
+            errorMessage;
+          document
+            .getElementById("modal__error_container")
+            .classList.add("active");
         }
       } catch (error) {
-        document.getElementById("modal__error_text").textContent = "An unexpected error occurred while saving the student.";
-        document.getElementById("modal__error_container").classList.add("active");
+        document.getElementById("modal__error_text").textContent =
+          "An unexpected error occurred while saving the student.";
+        document
+          .getElementById("modal__error_container")
+          .classList.add("active");
       }
     });
 

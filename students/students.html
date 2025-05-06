@@ -3,21 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
     <link rel="stylesheet" href="../header.css" />
     <link rel="stylesheet" href="../global.css" />
     <link rel="stylesheet" href="../navbar.css" />
     <link rel="stylesheet" href="students.css" />
     <link rel="icon" href="../assets/logo.svg" />
+    <link rel="manifest" href="../pwa/manifest.json" />
     <title>PI Project: Students</title>
   </head>
   <body>
-
     <header class="header">
-
       <div class="header__container header__container_logo">
-        <img class="header__icon" id="header__sideMenu" src="../assets/hamburger.svg" alt="Menu" />
+        <img
+          class="header__icon"
+          id="header__sideMenu"
+          src="../assets/hamburger.svg"
+          alt="Menu"
+        />
         <a class="header__link" href="../students/students.html">
-          <img class="header__icon header__logo" src="../assets/logo.svg" alt="Logotype" />
+          <img
+            class="header__icon header__logo"
+            src="../assets/logo.svg"
+            alt="Logotype"
+          />
         </a>
         <a class="header__link" href="../students/students.html">
           <h1>CMS</h1>
@@ -38,23 +47,38 @@
             class="header__notifications_signal"
             id="header__notifications_signal"
           />
-          <div class="header__notifications_preview" id="header__notifications_preview">
+          <div
+            class="header__notifications_preview"
+            id="header__notifications_preview"
+          >
             <div class="notification_item">
-              <img src="../assets/avatar_placeholder.svg" alt="Avatar" class="notification_avatar" />
+              <img
+                src="../assets/avatar_placeholder.svg"
+                alt="Avatar"
+                class="notification_avatar"
+              />
               <div>
                 <p><strong>John Doe</strong></p>
                 <p>Submitted assignment</p>
               </div>
             </div>
             <div class="notification_item">
-              <img src="../assets/avatar_placeholder.svg" alt="Avatar" class="notification_avatar" />
+              <img
+                src="../assets/avatar_placeholder.svg"
+                alt="Avatar"
+                class="notification_avatar"
+              />
               <div>
                 <p><strong>Jane Smith</strong></p>
                 <p>Requested feedback</p>
               </div>
             </div>
             <div class="notification_item">
-              <img src="../assets/avatar_placeholder.svg" alt="Avatar" class="notification_avatar" />
+              <img
+                src="../assets/avatar_placeholder.svg"
+                alt="Avatar"
+                class="notification_avatar"
+              />
               <div>
                 <p><strong>Alice Johnson</strong></p>
                 <p>Missed deadline</p>
@@ -63,40 +87,59 @@
           </div>
         </div>
 
-        <div class="header__container header__container_account" id="header__profile">
+        <div
+          class="header__container header__container_account"
+          id="header__profile"
+        >
           <img
             class="header__icon"
             src="../assets/profile.svg"
             alt="Profile Icon"
           />
-          <h2>Bohdan Hamela</h2>
+          <h2 id="header__user">Bohdan Hamela</h2>
           <div class="header__profile_dropdown" id="header__profile_dropdown">
             <a href="#" id="header__profileLink">Profile</a>
             <a href="#" id="header__logoutBtn">Log Out</a>
           </div>
         </div>
       </div>
-
     </header>
 
     <div id="page__container">
       <aside class="aside" id="navbar">
         <nav class="aside__nav">
           <ul class="aside__nav_list">
-            <li><a href="../dashboard/dashboard.html"><img src="../assets/dashboard.svg" alt="Dashboard page">Dashboard</a></li>
             <li>
-              <a href="../students/students.html"><img src="../assets/students.svg" alt="Students page"><strong>Students</strong></a>
+              <a href="../dashboard/dashboard.html"
+                ><img
+                  src="../assets/dashboard.svg"
+                  alt="Dashboard page"
+                />Dashboard</a
+              >
             </li>
-            <li><a href="../tasks/tasks.html"><img src="../assets/tasks.svg" alt="Tasks page">Tasks</a></li>
+            <li>
+              <a href="../students/students.html"
+                ><img src="../assets/students.svg" alt="Students page" /><strong
+                  >Students</strong
+                ></a
+              >
+            </li>
+            <li>
+              <a href="../tasks/tasks.html"
+                ><img src="../assets/tasks.svg" alt="Tasks page" />Tasks</a
+              >
+            </li>
           </ul>
         </nav>
       </aside>
 
       <main class="main__container">
-        <h2 class="page__main_heading">Students</h2>
-        <button id="main__addStudentBtn" class="button_img">
-          <img src="../assets/add.svg" alt="Add new student">
-        </button>
+        <div class="main_heading_container">
+          <h2 class="main__heading">Students</h2>
+          <button id="main__addStudentBtn" class="button_img">
+            <img src="../assets/add.svg" alt="Add new student" />
+          </button>
+        </div>
         <div class="main__table_container">
           <table id="main__table">
             <tr class="main__table_header">
@@ -118,80 +161,131 @@
             </tr>
           </table>
         </div>
-        <div class="main__table_pagination">
-          <button>&lt;</button>
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>&gt;</button>
-        </div>
+        <div class="main__table_pagination"></div>
 
         <div id="modal__addEdit_container" class="modal-container">
           <div id="modal__addEdit" class="modal">
             <form id="modal__addEdit_form">
               <div class="modal__header">
                 <h3 id="modal__addEdit_heading">Add/Edit</h3>
-                <button id="modal__addEdit_closeBtn" class="button_img"><img src="../assets/close.svg" alt="Close"></button>
+                <button id="modal__addEdit_closeBtn" class="button_img">
+                  <img src="../assets/close.svg" alt="Close" />
+                </button>
               </div>
               <hr />
               <div class="modal__addEdit_inputs_container">
                 <div class="modal__addEdit_input_container">
                   <label for="modal__addEdit_GroupInput">Group</label>
-                  <select name="groups" id="modal__addEdit_GroupInput">
-                    <option value="">----</option>
-                    <option value="PZ-22">PZ-22</option>
-                    <option value="KI-34">KI-34</option>
-                    <option value="IR-12">IR-12</option>
-                    <option value="DP-32">DP-32</option>
-                    <option value="LK-45">LK-45</option>
-                    <option value="JH-14">JH-14</option>
-                  </select>
+                  <div class="modal__addEdit_input_container_error">
+                    <select name="groups" id="modal__addEdit_GroupInput">
+                      <option value="">--Select a group--</option>
+                      <option value="PZ-22">PZ-22</option>
+                      <option value="KI-34">KI-34</option>
+                      <option value="IR-12">IR-12</option>
+                      <option value="DP-32">DP-32</option>
+                      <option value="LK-45">LK-45</option>
+                      <option value="JH-14">JH-14</option>
+                    </select>
+                    <span class="error-message">Choose an option</span>
+                  </div>
                 </div>
                 <div class="modal__addEdit_input_container">
                   <label for="modal__addEdit_FirstNameInput">First Name</label>
-                  <input type="text" id="modal__addEdit_FirstNameInput" />
+                  <div class="modal__addEdit_input_container_error">
+                    <input
+                      type="text"
+                      id="modal__addEdit_FirstNameInput"
+                      placeholder="John"
+                    />
+                    <span class="error-message">Enter a valid first name</span>
+                  </div>
                 </div>
                 <div class="modal__addEdit_input_container">
                   <label for="modal__addEdit_LastNameInput">Last Name</label>
-                  <input type="text" id="modal__addEdit_LastNameInput" />
+                  <div class="modal__addEdit_input_container_error">
+                    <input
+                      type="text"
+                      id="modal__addEdit_LastNameInput"
+                      placeholder="Black"
+                    />
+                    <span class="error-message">Enter a valid last name</span>
+                  </div>
                 </div>
                 <div class="modal__addEdit_input_container">
                   <label for="modal__addEdit_GenderInput">Gender</label>
-                  <select name="genders" id="modal__addEdit_GenderInput">
-                    <option value="">----</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                  </select>
+                  <div class="modal__addEdit_input_container_error">
+                    <select name="genders" id="modal__addEdit_GenderInput">
+                      <option value="">--Select a gender--</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    <span class="error-message">Choose an option</span>
+                  </div>
                 </div>
                 <div class="modal__addEdit_input_container">
                   <label for="modal__addEdit_BirthdayInput">Birthday</label>
-                  <input type="date" id="modal__addEdit_BirthdayInput" />
+                  <div class="modal__addEdit_input_container_error">
+                    <input type="date" id="modal__addEdit_BirthdayInput" />
+                    <span class="error-message"
+                      >Student should be from 16 to 100 years old</span
+                    >
+                  </div>
                 </div>
               </div>
               <hr />
               <div class="modal__buttons">
-                <input type="submit" id="modal__addEdit_confirmBtn" value="Ok" class="button_text" />
-                <button id="modal__addEdit_cancelBtn" class="button_text">Cancel</button>
+                <input
+                  type="submit"
+                  id="modal__addEdit_confirmBtn"
+                  value="Ok"
+                  class="button_text"
+                />
+                <button id="modal__addEdit_cancelBtn" class="button_text">
+                  Cancel
+                </button>
               </div>
             </form>
           </div>
           <div class="modal-backdrop"></div>
         </div>
-       
+
         <div id="modal__delete_container" class="modal-container">
           <div id="modal__delete" class="modal">
             <div class="modal__header">
               <h3>Warning</h3>
-              <button id="modal__delete_closeBtn" class="button_img"><img src="../assets/close.svg" alt="Close"></button>
+              <button id="modal__delete_closeBtn" class="button_img">
+                <img src="../assets/close.svg" alt="Close" />
+              </button>
             </div>
             <hr />
             <p id="modal__delete_text"></p>
             <hr />
             <div class="modal__buttons">
-              <button id="modal__delete_confirmBtn" class="button_text">Ok</button>
-              <button id="modal__delete_cancelBtn" class="button_text">Cancel</button>
+              <button id="modal__delete_confirmBtn" class="button_text">
+                Ok
+              </button>
+              <button id="modal__delete_cancelBtn" class="button_text">
+                Cancel
+              </button>
+            </div>
+          </div>
+          <div class="modal-backdrop"></div>
+        </div>
+
+        <div id="modal__error_container" class="modal-container">
+          <div id="modal__error" class="modal">
+            <div class="modal__header">
+              <h3>Error</h3>
+              <button id="modal__error_closeBtn" class="button_img">
+                <img src="../assets/close.svg" alt="Close" />
+              </button>
+            </div>
+            <hr />
+            <p id="modal__error_text"></p>
+            <hr />
+            <div class="modal__buttons">
+              <button id="modal__error_okBtn" class="button_text">Ok</button>
             </div>
           </div>
           <div class="modal-backdrop"></div>
@@ -201,7 +295,10 @@
 
     <footer></footer>
 
+    <script src="../env.js"></script>
+    <script src="../auth/auth.js"></script>
     <script src="../header.js"></script>
     <script src="students.js"></script>
+    <script src="../pwa/init_sw.js"></script>
   </body>
 </html>

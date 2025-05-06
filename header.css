@@ -139,14 +139,24 @@
 }
 
 @keyframes jiggle {
-  0% { transform: rotate(-5deg); }
-  100% { transform: rotate(5deg); }
+  0% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(5deg);
+  }
 }
 
 @keyframes fade-in-fade-out {
-  0% { opacity: 0; }
-  50% { opacity: 1%; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1%;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 /* Small screens (576px and up) - No changes here */

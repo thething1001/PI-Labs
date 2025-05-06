@@ -9,13 +9,20 @@
   overflow: hidden;
 }
 
+.main_heading_container {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
 .button_img {
-  align-self: flex-end;
   width: 25px;
   height: 25px;
   background-color: transparent;
   border: 0;
   padding: 0;
+  cursor: pointer;
 }
 
 .button_img img {
@@ -56,6 +63,16 @@ td {
   height: 35px;
 }
 
+#main__table th,
+th label {
+  background-color: rgb(81, 81, 81);
+  color: #f0f0f0;
+}
+
+#main__table tr:nth-child(2n) td {
+  background-color: #efefef;
+}
+
 .main__table_controls_container {
   width: 100%;
   display: flex;
@@ -75,6 +92,11 @@ td {
   left: auto;
   right: auto;
   margin: 0;
+  cursor: pointer;
+}
+
+#main__table_selectAll {
+  cursor: pointer;
 }
 
 .main__table_selector_container label {
@@ -91,6 +113,7 @@ td {
   justify-content: center;
   width: 35px;
   height: 35px;
+  cursor: pointer;
 }
 
 .main__table_controls_button img,
@@ -118,6 +141,15 @@ td {
 .main__table_pagination button {
   padding: 5px 10px;
   font-size: 14px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.main__table_pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.main__table_pagination span {
+  margin: 0 10px;
 }
 
 /* Modals */
@@ -183,10 +215,17 @@ td {
 .modal__addEdit_input_container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin: 8px 0;
   flex-direction: column;
   gap: 5px;
+}
+
+.modal__addEdit_input_container_error {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .modal__addEdit_input_container label {
@@ -215,6 +254,24 @@ td {
   font-size: 14px;
 }
 
+.modal__addEdit_input_container.error input,
+.modal__addEdit_input_container.error select {
+  border-color: #ff0000;
+  background-color: #fff5f5;
+}
+
+/* Error message styling */
+.error-message {
+  color: #ff0000;
+  font-size: 12px;
+  margin-top: 2px;
+  visibility: hidden;
+}
+
+.modal__addEdit_input_container.error .error-message {
+  visibility: visible;
+}
+
 /* Small screens (576px and up) */
 @media (min-width: 576px) {
   .main__container {
@@ -223,8 +280,8 @@ td {
   }
 
   .button_img {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
   }
 
   #main__table tr {
@@ -269,6 +326,13 @@ td {
 
   .modal__addEdit_input_container input,
   .modal__addEdit_input_container select {
+    width: 100%;
+  }
+
+  .modal__addEdit_input_container_error {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     width: 70%;
   }
 
@@ -285,7 +349,7 @@ td {
   }
 
   #modal__addEdit {
-    width: 40%;
+    width: 50%;
   }
 
   .main__table_controls_button {

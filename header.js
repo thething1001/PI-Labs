@@ -1,4 +1,36 @@
+async function logoutUser() {
+  const token = sessionStorage.getItem("auth_token");
+  if (!token) window.location.href = "/PI-Labs/auth/login.html";
+  console.log("wfwqfqw");
+
+  try {
+    await fetch(`${BASE_API_URL}/auth/logout`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    sessionStorage.removeItem("auth_token");
+    sessionStorage.removeItem("user");
+    window.location.href = "/PI-Labs/auth/login.html";
+  } catch (error) {
+    console.error("Logout error:", error);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", (e) => {
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  console.log(user);
+  document.getElementById(
+    "header__user"
+  ).textContent = `${user.first_name} ${user.last_name}`;
+
+  document.getElementById("header__logoutBtn").addEventListener("click", () => {
+    logoutUser();
+  });
+
   // Navbar toggle
   document.getElementById("header__sideMenu").addEventListener("click", (e) => {
     const navbar = document.getElementById("navbar");
@@ -10,7 +42,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
   document.addEventListener("click", (e) => {
     const navbar = document.getElementById("navbar");
     const sideMenu = document.getElementById("header__sideMenu");
-    if (window.innerWidth < 768 && !navbar.contains(e.target) && !sideMenu.contains(e.target)) {
+    if (
+      window.innerWidth < 768 &&
+      !navbar.contains(e.target) &&
+      !sideMenu.contains(e.target)
+    ) {
       navbar.classList.remove("active");
     }
   });

@@ -6,7 +6,6 @@
     <meta name="theme-color" content="#000000" />
     <link rel="stylesheet" href="../header.css" />
     <link rel="stylesheet" href="../global.css" />
-
     <link rel="stylesheet" href="../navbar.css" />
     <link rel="stylesheet" href="students.css" />
     <link rel="icon" href="../assets/logo.svg" />
@@ -97,7 +96,7 @@
             src="../assets/profile.svg"
             alt="Profile Icon"
           />
-          <h2>Bohdan Hamela</h2>
+          <h2 id="header__user">Bohdan Hamela</h2>
           <div class="header__profile_dropdown" id="header__profile_dropdown">
             <a href="#" id="header__profileLink">Profile</a>
             <a href="#" id="header__logoutBtn">Log Out</a>
@@ -162,14 +161,7 @@
             </tr>
           </table>
         </div>
-        <div class="main__table_pagination">
-          <button>&lt;</button>
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>&gt;</button>
-        </div>
+        <div class="main__table_pagination"></div>
 
         <div id="modal__addEdit_container" class="modal-container">
           <div id="modal__addEdit" class="modal">
@@ -236,7 +228,7 @@
                   <div class="modal__addEdit_input_container_error">
                     <input type="date" id="modal__addEdit_BirthdayInput" />
                     <span class="error-message"
-                      >Student shoud be from 16 to 100 years old</span
+                      >Student should be from 16 to 100 years old</span
                     >
                   </div>
                 </div>
@@ -280,11 +272,31 @@
           </div>
           <div class="modal-backdrop"></div>
         </div>
+
+        <div id="modal__error_container" class="modal-container">
+          <div id="modal__error" class="modal">
+            <div class="modal__header">
+              <h3>Error</h3>
+              <button id="modal__error_closeBtn" class="button_img">
+                <img src="../assets/close.svg" alt="Close" />
+              </button>
+            </div>
+            <hr />
+            <p id="modal__error_text"></p>
+            <hr />
+            <div class="modal__buttons">
+              <button id="modal__error_okBtn" class="button_text">Ok</button>
+            </div>
+          </div>
+          <div class="modal-backdrop"></div>
+        </div>
       </main>
     </div>
 
     <footer></footer>
 
+    <script src="../env.js"></script>
+    <script src="../auth/auth.js"></script>
     <script src="../header.js"></script>
     <script src="students.js"></script>
     <script src="../pwa/init_sw.js"></script>

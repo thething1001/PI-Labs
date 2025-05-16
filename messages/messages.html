@@ -3,13 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../global.css" />
+    <meta name="theme-color" content="#000000" />
     <link rel="stylesheet" href="../header.css" />
+    <link rel="stylesheet" href="../global.css" />
     <link rel="stylesheet" href="../navbar.css" />
     <link rel="stylesheet" href="messages.css" />
     <link rel="icon" href="../assets/logo.svg" />
     <link rel="manifest" href="../pwa/manifest.json" />
-    <title>PI Project: Messages</title>
+    <title>PI Project: Chat rooms</title>
   </head>
   <body>
     <header class="header">
@@ -95,7 +96,7 @@
             src="../assets/profile.svg"
             alt="Profile Icon"
           />
-          <h2>Bohdan Hamela</h2>
+          <h2 id="header__user">Bohdan Hamela</h2>
           <div class="header__profile_dropdown" id="header__profile_dropdown">
             <a href="#" id="header__profileLink">Profile</a>
             <a href="#" id="header__logoutBtn">Log Out</a>
@@ -112,18 +113,19 @@
               <a href="../dashboard/dashboard.html"
                 ><img
                   src="../assets/dashboard.svg"
-                  alt="Dashboard"
+                  alt="Dashboard page"
                 />Dashboard</a
               >
             </li>
             <li>
               <a href="../students/students.html"
-                ><img src="../assets/students.svg" alt="Dashboard" />Students</a
-              >
+                ><img src="../assets/students.svg" alt="Students page" />
+                Students
+              </a>
             </li>
             <li>
               <a href="../tasks/tasks.html"
-                ><img src="../assets/tasks.svg" alt="Dashboard" />Tasks</a
+                ><img src="../assets/tasks.svg" alt="Tasks page" />Tasks</a
               >
             </li>
           </ul>
@@ -131,13 +133,62 @@
       </aside>
 
       <main class="main__container">
-        <h2 class="page__main_heading">Messages</h2>
+        <h2 class="page__main_heading">Chat rooms</h2>
+
+        <section class="main__chatrooms_container">
+          <section class="chatrooms__select">
+            <div class="chatrooms__select_newButton_container">
+              <button>Create new chat</button>
+              <img src="../assets/add.svg" alt="Add new student" />
+            </div>
+            <ul id="chatrooms__select_list">
+              <li>Chatroom 1</li>
+              <li>Chatroom 2</li>
+              <li>Chatroom 3</li>
+              <li>Chatroom 4</li>
+              <li>Chatroom 5</li>
+            </ul>
+          </section>
+          <section class="chatrooms__chatroom">
+            <h3 id="chat__name">Chatroom 1</h3>
+            <div id="chat__container">
+              <div class="chat__msg_container chat__senderMsg_container">
+                <p>
+                  Msg 1 dgfhgjhkuktyresdfghvjkhkhgk fjddzxfghcjvkblnfdy
+                  jtyjgfkjfjgkfjkgfjkgfgjfkjfkjfjkf
+                </p>
+              </div>
+              <div class="chat__msg_container chat__senderMsg_container">
+                <p>Msg 2dabdhabsdhiasbd qdjwqodhqwodhqudhdiwehiweuhfiweuhfiwehufiuweh</p>
+              </div>
+              <div class="chat__msg_container chat__receiverMsg_container">
+                <p>Msg 3</p>
+              </div>
+              <div class="chat__msg_container chat__senderMsg_container">
+                <p>Msg 4</p>
+              </div>
+              <div class="chat__msg_container chat__receiverMsg_container">
+                <p>Msg 5</p>
+              </div>
+              <div class="chat__msg_container chat__receiverMsg_container">
+                <p>Msg 6</p>
+              </div>
+            </div>
+            <div id="chat__messegeInput_container">
+              <input type="text" />
+              <button>Send</button>
+            </div>
+          </section>
+        </section>
       </main>
     </div>
 
     <footer></footer>
 
-    <script src="messages.js"></script>
+    <script src="../env.js"></script>
+    <script src="../auth/auth.js"></script>
     <script src="../header.js"></script>
+    <script src="messages.js"></script>
+    <script src="../pwa/init_sw.js"></script>
   </body>
 </html>

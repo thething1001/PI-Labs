@@ -105,14 +105,22 @@
         <section class="main__chatrooms_container">
           <section class="chatrooms__select">
             <div class="chatrooms__select_newButton_container">
-              <button id="chatrooms__select_newButton">Create new chat</button>
+              <button class="button_text" id="chatrooms__select_newButton">
+                Create new chat
+              </button>
             </div>
             <ul id="chatrooms__select_list"></ul>
           </section>
           <section class="chatrooms__chatroom">
             <div class="chatrooms__clasroom_header">
+              <button class="chatrooms__hamburger button_text">☰</button>
               <h3 id="chat__name">No chatroom selected</h3>
-              <button id="chatrooms__add_new">Edit chatroom</button>
+              <div class="but_chat_cont">
+                <button class="button_text" id="chatrooms__add_new">
+                  Edit chatroom
+                </button>
+                <button class="button_text" id="chatrooms__delete">X</button>
+              </div>
             </div>
             <div id="chat__container">
               <div id="chat__messages_container">

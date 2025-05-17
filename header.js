@@ -121,18 +121,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
   });
 
   socket.on("message", (msg) => {
-    if (window.location.pathname.includes("messages.html")) {
-      // const urlParams = new URLSearchParams(window.location.search);
-      // const currentChatroom = urlParams.get("chatroom");
-      // if (currentChatroom === msg.chatroomId) return; // No animation if in the same chat
-      return;
+    if (!window.location.pathname.includes("messages.html")) {
+      bell.style.animation = "jiggle 0.3s 3";
+      signal.style.opacity = "100%";
+      setTimeout(() => {
+        bell.style.animation = "";
+      }, 900);
     }
 
-    bell.style.animation = "jiggle 0.3s 3";
-    signal.style.opacity = "100%";
-    setTimeout(() => {
-      bell.style.animation = "";
-    }, 900);
     loadNotifications();
   });
 

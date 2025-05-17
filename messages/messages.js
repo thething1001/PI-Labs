@@ -23,11 +23,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const newChatroomModalSelect = document.getElementById("participants_select");
   const newChatroomModalName = document.getElementById("chat_name");
   const newChatroomModalSubmit = document.getElementById("create_chat_submit");
+  const chatroomsHamburger = document.querySelector(".chatrooms__hamburger");
+  const chatroomsSelect = document.querySelector(".chatrooms__select");
+
+  const chatroomDelete = document.getElementById("chatrooms__delete");
 
   const urlParams = new URLSearchParams(window.location.search);
   let currentChatroomId = urlParams.get("chatroom");
 
-  // Fetch and display chatrooms
+  chatroomsHamburger.addEventListener("click", () => {
+    chatroomsSelect.classList.add("active");
+  });
+
+  document.addEventListener("click", (e) => {
+    if (
+      window.innerWidth < 768 &&
+      !chatroomsSelect.contains(e.target) &&
+      e.target != chatroomsHamburger
+    ) {
+      chatroomsSelect.classList.remove("active");
+    }
+  });
+
   async function loadChatrooms() {
     try {
       const response = await fetch(`${BASE_API2_URL}/chatrooms`, {
@@ -46,9 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (chatroom.participants.some((p) => p.id === user.id)) {
           li.classList.add("user__chatroom");
         }
-        li.addEventListener("click", () =>
-          loadMessages(chatroom._id, chatroom.name, chatroom.participants)
-        );
+        li.addEventListener("click", () => {
+          window.location.href = `../messages/messages.html?chatroom=${chatroom._id}`;
+        });
         chatroomsList.appendChild(li);
       });
     } catch (error) {
@@ -56,10 +73,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  async function loadMessages(chatroomId, _chatroomName, participants) {
+  async function loadMessages() {
+    if (!currentChatroomId) return;
+    const response = await fetch(
+      `${BASE_API2_URL}/chatrooms/${currentChatroomId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    if (response.status === 401) tokenExpired();
+    const chatroom = await response.json();
+
     chatroomInputMsgContainer.classList.add("active");
     chatroomAddMore.classList.add("active");
-    chatroomName.innerHTML = `${_chatroomName} (${participants
+    chatroomDelete.classList.add("active");
+    chatroomName.innerHTML = `${chatroom.name} (${chatroom.participants
       .map(
         (p) =>
           `<span class="chatroom__status ${
@@ -67,10 +95,9 @@ document.addEventListener("DOMContentLoaded", () => {
           }"></span> ${p.first_name} ${p.last_name}`
       )
       .join(", ")})`;
-    currentChatroomId = chatroomId;
     try {
       const response = await fetch(
-        `${BASE_API2_URL}/chatrooms/${chatroomId}/messages`,
+        `${BASE_API2_URL}/chatrooms/${currentChatroomId}/messages`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -119,6 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   createChatButton.addEventListener("click", async () => {
     isEdit = false;
+    newChatroomModalName.value = "";
     modalHeader.innerHTML = "Create new chatroom";
     newChatroomModalSubmit.innerHTML = "Create";
     const students = await fetchStudents();
@@ -134,15 +162,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   chatroomAddMore.addEventListener("click", async () => {
     isEdit = true;
+    const response = await fetch(
+      `${BASE_API2_URL}/chatrooms/${currentChatroomId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    if (response.status === 401) tokenExpired();
+    const chatroom = await response.json();
+
     modalHeader.innerHTML = "Edit chatroom";
     newChatroomModalSubmit.innerHTML = "Edit";
     const students = await fetchStudents();
     newChatroomModal.classList.add("active");
+    newChatroomModalName.value = chatroom.name;
     newChatroomModalSelect.innerHTML = `${students
       .filter((s) => s.id !== user.id)
       .map(
         (s) =>
-          `<option value="${s.id}">${s.first_name} ${s.last_name} (${s.email})</option>`
+          `<option ${
+            chatroom.participants.find((p) => p.id == s.id) ? "selected" : ""
+          } value="${s.id}">${s.first_name} ${s.last_name} (${
+            s.email
+          })</option>`
       )
       .join("")}`;
   });
@@ -170,6 +212,24 @@ document.addEventListener("DOMContentLoaded", () => {
     backdrop.addEventListener("click", (e) => {
       e.target.closest(".modal-container").classList.remove("active");
     });
+  });
+
+  chatroomDelete.addEventListener("click", async () => {
+    try {
+      const response = await fetch(
+        `${BASE_API2_URL}/chatrooms/${currentChatroomId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status === 401) tokenExpired();
+    } catch (error) {
+      console.error("Error creating chatroom:", error);
+    }
+    window.location.href = `../messages/messages.html`;
   });
 
   newChatroomModalSubmit.addEventListener("click", async () => {
@@ -205,9 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
   socket.on("message", async (msg) => {
     await loadChatrooms();
     if (msg.chatroomId === currentChatroomId) {
-      const chatroomLi = document.getElementById(`chatroom_${msg.chatroomId}`);
-      const event = new Event("click");
-      chatroomLi.dispatchEvent(event);
+      loadMessages();
     } else {
       const bell = document.getElementById("header__icon_notifications");
       const signal = document.getElementById("header__notifications_signal");
@@ -220,15 +278,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   socket.on("chatroom_updated", async () => {
-    await loadChatrooms();
-    if (currentChatroomId) {
-      const chatroomLi = document.getElementById(
-        `chatroom_${currentChatroomId}`
-      );
-      const event = new Event("click");
-      chatroomLi.dispatchEvent(event);
-    }
+    loadChatrooms();
+    loadMessages();
   });
 
   loadChatrooms();
+  loadMessages();
 });

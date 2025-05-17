@@ -1,5 +1,3 @@
-const user = JSON.parse(sessionStorage.getItem("user"));
-const token = sessionStorage.getItem("auth_token");
 let isEdit = false;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -7,8 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "/PI-Labs/auth/login.html";
     return;
   }
-  socket.emit("join", { userId: user.id, token });
-
   const chatroomsList = document.getElementById("chatrooms__select_list");
   const chatroomName = document.getElementById("chat__name");
   const chatroomInputMsgContainer = document.getElementById(
@@ -28,7 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const newChatroomModalName = document.getElementById("chat_name");
   const newChatroomModalSubmit = document.getElementById("create_chat_submit");
 
-  let currentChatroomId = null;
+  const urlParams = new URLSearchParams(window.location.search);
+  let currentChatroomId = urlParams.get("chatroom");
 
   // Fetch and display chatrooms
   async function loadChatrooms() {
@@ -36,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch(`${BASE_API2_URL}/chatrooms`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      if (response.status === 401) tokenExpired();
       const chatrooms = await response.json();
 
       chatroomsList.innerHTML = "";
@@ -58,12 +56,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Load messages for a chatroom
   async function loadMessages(chatroomId, _chatroomName, participants) {
     chatroomInputMsgContainer.classList.add("active");
     chatroomAddMore.classList.add("active");
     chatroomName.innerHTML = `${_chatroomName} (${participants
-      .map((p) => `${p.first_name} ${p.last_name} (${p.status})`)
+      .map(
+        (p) =>
+          `<span class="chatroom__status ${
+            p.status ? "online" : "offline"
+          }"></span> ${p.first_name} ${p.last_name}`
+      )
       .join(", ")})`;
     currentChatroomId = chatroomId;
     try {
@@ -73,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+      if (response.status === 401) tokenExpired();
       const messages = await response.json();
       chatContainer.innerHTML = "";
       messages.forEach((msg) => {
@@ -92,26 +95,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Send message
   sendButton.addEventListener("click", async () => {
     const content = messageInput.value.trim();
     if (!content || !currentChatroomId) return;
     try {
-      await fetch(`${BASE_API2_URL}/chatrooms/${currentChatroomId}/messages`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ content }),
-      });
+      const response = await fetch(
+        `${BASE_API2_URL}/chatrooms/${currentChatroomId}/messages`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ content }),
+        }
+      );
+      if (response.status === 401) tokenExpired();
       messageInput.value = "";
     } catch (error) {
       console.error("Error sending message:", error);
     }
   });
 
-  // Create new chatroom
   createChatButton.addEventListener("click", async () => {
     isEdit = false;
     modalHeader.innerHTML = "Create new chatroom";
@@ -142,12 +147,12 @@ document.addEventListener("DOMContentLoaded", () => {
       .join("")}`;
   });
 
-  // Fetch students from PHP backend
   async function fetchStudents() {
     try {
       const response = await fetch(`${BASE_API_URL}/students`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      if (response.status === 401) tokenExpired();
       return await response.json();
     } catch (error) {
       console.error("Error fetching students:", error);
@@ -178,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
       : `${BASE_API2_URL}/chatrooms`;
 
     try {
-      await fetch(url, {
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -189,6 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
           name: newChatroomModalName.value,
         }),
       });
+      if (response.status === 401) tokenExpired();
       newChatroomModal.classList.remove("active");
       loadChatrooms();
     } catch (error) {
@@ -196,7 +202,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Socket.IO events
   socket.on("message", async (msg) => {
     await loadChatrooms();
     if (msg.chatroomId === currentChatroomId) {
@@ -204,7 +209,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const event = new Event("click");
       chatroomLi.dispatchEvent(event);
     } else {
-      // Trigger notification animation if not in the chat
       const bell = document.getElementById("header__icon_notifications");
       const signal = document.getElementById("header__notifications_signal");
       bell.style.animation = "jiggle 0.3s 3";
@@ -226,6 +230,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Load initial chatrooms
   loadChatrooms();
 });

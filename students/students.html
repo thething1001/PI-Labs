@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="students.css" />
     <link rel="icon" href="../assets/logo.svg" />
     <link rel="manifest" href="../pwa/manifest.json" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.min.js"></script>
     <title>PI Project: Students</title>
   </head>
   <body>
@@ -50,41 +51,7 @@
           <div
             class="header__notifications_preview"
             id="header__notifications_preview"
-          >
-            <div class="notification_item">
-              <img
-                src="../assets/avatar_placeholder.svg"
-                alt="Avatar"
-                class="notification_avatar"
-              />
-              <div>
-                <p><strong>John Doe</strong></p>
-                <p>Submitted assignment</p>
-              </div>
-            </div>
-            <div class="notification_item">
-              <img
-                src="../assets/avatar_placeholder.svg"
-                alt="Avatar"
-                class="notification_avatar"
-              />
-              <div>
-                <p><strong>Jane Smith</strong></p>
-                <p>Requested feedback</p>
-              </div>
-            </div>
-            <div class="notification_item">
-              <img
-                src="../assets/avatar_placeholder.svg"
-                alt="Avatar"
-                class="notification_avatar"
-              />
-              <div>
-                <p><strong>Alice Johnson</strong></p>
-                <p>Missed deadline</p>
-              </div>
-            </div>
-          </div>
+          ></div>
         </div>
 
         <div
@@ -96,7 +63,7 @@
             src="../assets/profile.svg"
             alt="Profile Icon"
           />
-          <h2 id="header__user">Bohdan Hamela</h2>
+          <h2 id="header__user"></h2>
           <div class="header__profile_dropdown" id="header__profile_dropdown">
             <a href="#" id="header__profileLink">Profile</a>
             <a href="#" id="header__logoutBtn">Log Out</a>
@@ -297,6 +264,7 @@
 
     <script src="../env.js"></script>
     <script src="../auth/auth.js"></script>
+    <script src="../init_socket.js"></script>
     <script src="../header.js"></script>
     <script src="students.js"></script>
     <script src="../pwa/init_sw.js"></script>

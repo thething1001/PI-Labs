@@ -72,7 +72,7 @@
 }
 
 .chatroom__status.offline {
-  background-color: red;
+  background-color: gray;
 }
 
 .main__chatrooms_container {
@@ -80,7 +80,6 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 4fr;
-  /* Added: Ensures grid rows are constrained within the container's height */
   grid-template-rows: minmax(0, 1fr);
 }
 
@@ -96,7 +95,7 @@
 #chat__container {
   flex: 1;
   min-height: 0;
-  overflow-y: scroll; 
+  overflow-y: auto; 
 }
 
 .chatrooms__clasroom_header {

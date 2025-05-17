@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="messages.css" />
     <link rel="icon" href="../assets/logo.svg" />
     <link rel="manifest" href="../pwa/manifest.json" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.min.js"></script>
     <title>PI Project: Chat rooms</title>
   </head>
   <body>
@@ -138,48 +139,51 @@
         <section class="main__chatrooms_container">
           <section class="chatrooms__select">
             <div class="chatrooms__select_newButton_container">
-              <button>Create new chat</button>
-              <img src="../assets/add.svg" alt="Add new student" />
+              <button id="chatrooms__select_newButton">Create new chat</button>
             </div>
-            <ul id="chatrooms__select_list">
-              <li>Chatroom 1</li>
-              <li>Chatroom 2</li>
-              <li>Chatroom 3</li>
-              <li>Chatroom 4</li>
-              <li>Chatroom 5</li>
-            </ul>
+            <ul id="chatrooms__select_list"></ul>
           </section>
           <section class="chatrooms__chatroom">
-            <h3 id="chat__name">Chatroom 1</h3>
+            <div class="chatrooms__clasroom_header">
+              <h3 id="chat__name">No chatroom selected</h3>
+              <button id="chatrooms__add_new">Edit chatroom</button>
+            </div>
             <div id="chat__container">
-              <div class="chat__msg_container chat__senderMsg_container">
-                <p>
-                  Msg 1 dgfhgjhkuktyresdfghvjkhkhgk fjddzxfghcjvkblnfdy
-                  jtyjgfkjfjgkfjkgfjkgfgjfkjfkjfjkf
-                </p>
-              </div>
-              <div class="chat__msg_container chat__senderMsg_container">
-                <p>Msg 2dabdhabsdhiasbd qdjwqodhqwodhqudhdiwehiweuhfiweuhfiwehufiuweh</p>
-              </div>
-              <div class="chat__msg_container chat__receiverMsg_container">
-                <p>Msg 3</p>
-              </div>
-              <div class="chat__msg_container chat__senderMsg_container">
-                <p>Msg 4</p>
-              </div>
-              <div class="chat__msg_container chat__receiverMsg_container">
-                <p>Msg 5</p>
-              </div>
-              <div class="chat__msg_container chat__receiverMsg_container">
-                <p>Msg 6</p>
+              <div id="chat__messages_container">
+                <!-- Chat messages would go here -->
               </div>
             </div>
-            <div id="chat__messegeInput_container">
-              <input type="text" />
-              <button>Send</button>
+            <div id="chat__messageInput_container">
+              <input
+                id="chat__messageInput"
+                type="text"
+                placeholder="Type a message..."
+              />
+              <button id="chat__sendButton" class="button_text">Send</button>
             </div>
           </section>
         </section>
+
+        <div class="modal-container" id="modal-create-chat">
+          <div class="modal-backdrop"></div>
+          <div class="modal">
+            <div class="modal__header">
+              <h3 id="modal_header">Create New Chat</h3>
+              <button class="button_text modal__close">Close</button>
+            </div>
+            <div class="modal__create_chat_inputs_container">
+              <label for="chat_name">Chatroom name</label>
+              <input type="text" id="chat_name" />
+              <label for="participants_select">Participants</label>
+              <select multiple id="participants_select"></select>
+            </div>
+            <div class="modal__buttons">
+              <button class="button_text" id="create_chat_submit">
+                Create
+              </button>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
 

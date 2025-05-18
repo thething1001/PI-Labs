@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const newChatroomModalSubmit = document.getElementById("create_chat_submit");
   const chatroomsHamburger = document.querySelector(".chatrooms__hamburger");
   const chatroomsSelect = document.querySelector(".chatrooms__select");
+  const chatroomMembers = document.getElementById("chatroom_members");
 
   const chatroomDelete = document.getElementById("chatrooms__delete");
 
@@ -87,14 +88,22 @@ document.addEventListener("DOMContentLoaded", () => {
     chatroomInputMsgContainer.classList.add("active");
     chatroomAddMore.classList.add("active");
     chatroomDelete.classList.add("active");
-    chatroomName.innerHTML = `${chatroom.name} (${chatroom.participants
+    chatroomName.innerHTML = `${chatroom.name}`;
+    chatroomMembers.innerHTML = `${chatroom.participants
       .map(
         (p) =>
-          `<span class="chatroom__status ${
+          `<div class="chatroom_member">
+          <img
+            class="chatroom__header_icon"
+            src="../assets/avatar_placeholder.svg"
+            alt="Profile Icon"
+          />
+          <span><span class="chatroom__status ${
             p.status ? "online" : "offline"
-          }"></span> ${p.first_name} ${p.last_name}`
+          }"></span> ${p.first_name}</span><span>${p.last_name}</span>
+        </div>`
       )
-      .join(", ")})`;
+      .join(" ")}`;
     try {
       const response = await fetch(
         `${BASE_API2_URL}/chatrooms/${currentChatroomId}/messages`,
@@ -108,12 +117,24 @@ document.addEventListener("DOMContentLoaded", () => {
       messages.forEach((msg) => {
         const isSender = msg.sender.id == user.id;
         const msgDiv = document.createElement("div");
-        msgDiv.className = `chat__msg_container ${
-          isSender ? "chat__senderMsg_container" : "chat__receiverMsg_container"
+        msgDiv.className = `chat__msg_container_div ${
+          isSender
+            ? "chat__senderMsg_container_div"
+            : "chat__receiverMsg_container_div"
         }`;
-        msgDiv.innerHTML = `
-          <p>${msg.sender.first_name} ${msg.sender.last_name}: ${msg.content}</p>
-        `;
+        msgDiv.innerHTML = `<div class="msg_header ${
+          isSender ? "msg_header_sender" : "msg_header_receiver"
+        }">
+          <img
+            class="chatroom__header_icon"
+            src="../assets/avatar_placeholder.svg"
+            alt="Profile Icon"
+          />
+          <span>${msg.sender.first_name} ${msg.sender.last_name}:</span>
+        </div>
+        <div class="chat__msg_container ${
+          isSender ? "chat__senderMsg_container" : "chat__receiverMsg_container"
+        }"><p>${msg.content}</p></div>`;
         chatContainer.appendChild(msgDiv);
       });
       chatContainerScroll.scrollTop = chatContainerScroll.scrollHeight;

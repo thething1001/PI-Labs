@@ -1,7 +1,6 @@
 async function logoutUser() {
   const token = sessionStorage.getItem("auth_token");
   if (!token) window.location.href = "/PI-Labs/auth/login.html";
-  console.log("wfwqfqw");
 
   try {
     await fetch(`${BASE_API_URL}/auth/logout`, {
@@ -22,7 +21,8 @@ async function logoutUser() {
 
 document.addEventListener("DOMContentLoaded", (e) => {
   const user = JSON.parse(sessionStorage.getItem("user"));
-  console.log(user);
+  const token = sessionStorage.getItem("auth_token");
+
   document.getElementById(
     "header__user"
   ).textContent = `${user.first_name} ${user.last_name}`;
@@ -54,6 +54,57 @@ document.addEventListener("DOMContentLoaded", (e) => {
   // Notifications bell functionality
   const bell = document.getElementById("header__icon_notifications");
   const signal = document.getElementById("header__notifications_signal");
+  const notificationsPreview = document.getElementById(
+    "header__notifications_preview"
+  );
+
+  async function loadNotifications() {
+    try {
+      const response = await fetch(`${BASE_API2_URL}/chatrooms`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const chatrooms = await response.json();
+      notificationsPreview.innerHTML = "";
+      for (const chatroom of chatrooms) {
+        const messages = await fetch(
+          `${BASE_API2_URL}/chatrooms/${chatroom._id}/messages`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        ).then((res) => res.json());
+
+        let lastNonCurrentUserMessage = null;
+        for (let i = messages.length - 1; i >= 0; i--) {
+          if (messages[i].sender.id != user.id) {
+            lastNonCurrentUserMessage = messages[i];
+            break;
+          }
+        }
+        if (lastNonCurrentUserMessage) {
+          const notification = document.createElement("div");
+          notification.className = "notification_item";
+          notification.dataset.chatroomId = chatroom._id;
+          notification.innerHTML = `
+            <img class="notification_avatar" src="../assets/avatar_placeholder.svg" alt="Avatar">
+            <div>
+              <p><strong>${lastNonCurrentUserMessage.sender.first_name} ${
+            lastNonCurrentUserMessage.sender.last_name
+          }</strong> (${chatroom.name}):</p>
+              <p>${lastNonCurrentUserMessage.content.slice(0, 20)}${
+            lastNonCurrentUserMessage.content.length > 20 ? "..." : ""
+          }</p>
+            </div>
+          `;
+          notification.addEventListener("click", () => {
+            window.location.href = `../messages/messages.html?chatroom=${chatroom._id}`;
+          });
+          notificationsPreview.appendChild(notification);
+        }
+      }
+    } catch (error) {
+      console.error("Error loading notifications:", error);
+    }
+  }
 
   bell.addEventListener("click", (e) => {
     signal.style.opacity = "0%";
@@ -68,4 +119,18 @@ document.addEventListener("DOMContentLoaded", (e) => {
       signal.style.opacity = "100%";
     }, 900);
   });
+
+  socket.on("message", (msg) => {
+    if (!window.location.pathname.includes("messages.html")) {
+      bell.style.animation = "jiggle 0.3s 3";
+      signal.style.opacity = "100%";
+      setTimeout(() => {
+        bell.style.animation = "";
+      }, 900);
+    }
+
+    loadNotifications();
+  });
+
+  loadNotifications();
 });

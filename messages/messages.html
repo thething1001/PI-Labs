@@ -3,13 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../global.css" />
+    <meta name="theme-color" content="#000000" />
     <link rel="stylesheet" href="../header.css" />
+    <link rel="stylesheet" href="../global.css" />
     <link rel="stylesheet" href="../navbar.css" />
     <link rel="stylesheet" href="messages.css" />
     <link rel="icon" href="../assets/logo.svg" />
     <link rel="manifest" href="../pwa/manifest.json" />
-    <title>PI Project: Messages</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.min.js"></script>
+    <title>PI Project: Chat rooms</title>
   </head>
   <body>
     <header class="header">
@@ -49,41 +51,7 @@
           <div
             class="header__notifications_preview"
             id="header__notifications_preview"
-          >
-            <div class="notification_item">
-              <img
-                src="../assets/avatar_placeholder.svg"
-                alt="Avatar"
-                class="notification_avatar"
-              />
-              <div>
-                <p><strong>John Doe</strong></p>
-                <p>Submitted assignment</p>
-              </div>
-            </div>
-            <div class="notification_item">
-              <img
-                src="../assets/avatar_placeholder.svg"
-                alt="Avatar"
-                class="notification_avatar"
-              />
-              <div>
-                <p><strong>Jane Smith</strong></p>
-                <p>Requested feedback</p>
-              </div>
-            </div>
-            <div class="notification_item">
-              <img
-                src="../assets/avatar_placeholder.svg"
-                alt="Avatar"
-                class="notification_avatar"
-              />
-              <div>
-                <p><strong>Alice Johnson</strong></p>
-                <p>Missed deadline</p>
-              </div>
-            </div>
-          </div>
+          ></div>
         </div>
 
         <div
@@ -95,7 +63,7 @@
             src="../assets/profile.svg"
             alt="Profile Icon"
           />
-          <h2>Bohdan Hamela</h2>
+          <h2 id="header__user"></h2>
           <div class="header__profile_dropdown" id="header__profile_dropdown">
             <a href="#" id="header__profileLink">Profile</a>
             <a href="#" id="header__logoutBtn">Log Out</a>
@@ -112,18 +80,19 @@
               <a href="../dashboard/dashboard.html"
                 ><img
                   src="../assets/dashboard.svg"
-                  alt="Dashboard"
+                  alt="Dashboard page"
                 />Dashboard</a
               >
             </li>
             <li>
               <a href="../students/students.html"
-                ><img src="../assets/students.svg" alt="Dashboard" />Students</a
-              >
+                ><img src="../assets/students.svg" alt="Students page" />
+                Students
+              </a>
             </li>
             <li>
               <a href="../tasks/tasks.html"
-                ><img src="../assets/tasks.svg" alt="Dashboard" />Tasks</a
+                ><img src="../assets/tasks.svg" alt="Tasks page" />Tasks</a
               >
             </li>
           </ul>
@@ -131,13 +100,79 @@
       </aside>
 
       <main class="main__container">
-        <h2 class="page__main_heading">Messages</h2>
+        <h2 class="page__main_heading">Chat rooms</h2>
+
+        <section class="main__chatrooms_container">
+          <section class="chatrooms__select">
+            <div class="chatrooms__select_newButton_container">
+              <button class="button_text" id="chatrooms__select_newButton">
+                Create new chat
+              </button>
+            </div>
+            <ul id="chatrooms__select_list"></ul>
+          </section>
+          <section class="chatrooms__chatroom">
+            <div class="chatrooms__clasroom_header_div">
+              <div class="chatrooms__clasroom_header">
+                <button class="chatrooms__hamburger button_text">☰</button>
+                <h3 id="chat__name">No chatroom selected</h3>
+                <div class="but_chat_cont">
+                  <button class="button_text" id="chatrooms__add_new">
+                    Edit chatroom
+                  </button>
+                  <button class="button_text" id="chatrooms__delete">X</button>
+                </div>
+              </div>
+              <div id="chatroom_members_cont">
+                <div id="chatroom_members"></div>
+              </div>
+            </div>
+            <div id="chat__container">
+              <div id="chat__messages_container">
+                <!-- Chat messages would go here -->
+              </div>
+            </div>
+            <div id="chat__messageInput_container">
+              <input
+                id="chat__messageInput"
+                type="text"
+                placeholder="Type a message..."
+              />
+              <button id="chat__sendButton" class="button_text">Send</button>
+            </div>
+          </section>
+        </section>
+
+        <div class="modal-container" id="modal-create-chat">
+          <div class="modal-backdrop"></div>
+          <div class="modal">
+            <div class="modal__header">
+              <h3 id="modal_header">Create New Chat</h3>
+              <button class="button_text modal__close">Close</button>
+            </div>
+            <div class="modal__create_chat_inputs_container">
+              <label for="chat_name">Chatroom name</label>
+              <input type="text" id="chat_name" />
+              <label for="participants_select">Participants</label>
+              <select multiple id="participants_select"></select>
+            </div>
+            <div class="modal__buttons">
+              <button class="button_text" id="create_chat_submit">
+                Create
+              </button>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
 
     <footer></footer>
 
-    <script src="messages.js"></script>
+    <script src="../env.js"></script>
+    <script src="../auth/auth.js"></script>
+    <script src="../init_socket.js"></script>
     <script src="../header.js"></script>
+    <script src="messages.js"></script>
+    <script src="../pwa/init_sw.js"></script>
   </body>
 </html>
